@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>chain_Batch</members>
+        <members>chain_Batch_TEST</members>
+        <members>chain_Chainable</members>
+        <members>chain_Chainable_TEST</members>
+        <members>chain_Future</members>
+        <members>chain_Future_TEST</members>
+        <members>chain_Manager</members>
+        <members>chain_Manager_TEST</members>
+        <members>chain_Method</members>
+        <members>chain_Method_TEST</members>
+        <members>chain_Queue</members>
+        <members>chain_Queue_TEST</members>
+        <members>chain_Schedule</members>
+        <members>chain_ScheduleBatch</members>
+        <members>chain_ScheduleBatch_TEST</members>
+        <members>chain_Schedule_TEST</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <name>Profile</name>
+    </types>
+    <version>44.0</version>
+</Package>
