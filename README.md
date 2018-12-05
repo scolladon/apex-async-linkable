@@ -59,7 +59,7 @@ public class Service {
 
 ## Improvement
 
-Implement sub class allowing to handle Batch and ScheduleBatch with iterable in addition of QueryLocator
+Implement sub class allowing to handle Batch and ScheduleBatch with iterable in addition of QueryLocator\
 Allow to benefit from [this pilot](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_enhanced_future_overview.htm) for the chain_Future class
 
 ## Versioning
