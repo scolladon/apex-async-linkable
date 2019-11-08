@@ -1,9 +1,19 @@
 public inherited sharing abstract class chain_Batch extends chain_Chainable implements Database.Batchable<sObject> {
-  private Database.BatchableContext bc;
-  private List<sObject> scope;
+  static protected final Integer MAX_SCOPE_SIZE = 2000;
+  protected Database.BatchableContext bc;
+  protected List<sObject> scope;
+  protected Integer scopeSize;
 
   public chain_Batch(){
     super();
+    if(this.scopeSize == null || this.scopeSize < 1 || this.scopeSize > chain_Batch.MAX_SCOPE_SIZE) {
+        this.scopeSize = chain_Batch.MAX_SCOPE_SIZE;
+    }
+  }
+
+  public chain_Batch(final Integer scopeSize){
+    this.scopeSize = scopeSize;
+    this();    
   }
 
   protected override abstract void job();
