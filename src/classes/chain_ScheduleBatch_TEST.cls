@@ -39,7 +39,8 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
 
   @isTest
   static void testFail() {
-    chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST('test',1,1,true);
+    chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST();
+    aChainable = new chain_ScheduleBatch_TEST('test',1,1,true);
 
     test.startTest();
     try {
