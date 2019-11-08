@@ -1,5 +1,5 @@
 public inherited sharing abstract class chain_Batch extends chain_Chainable implements Database.Batchable<sObject> {
-  static protected final Integer MAX_SCOPE_SIZE = 2000;
+  static public final Integer MAX_SCOPE_SIZE = 2000;
   protected Database.BatchableContext bc;
   protected List<sObject> scope;
   protected Integer scopeSize;
