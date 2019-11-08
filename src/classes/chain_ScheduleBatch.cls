@@ -7,7 +7,7 @@ public inherited sharing abstract class chain_ScheduleBatch extends chain_Batch 
   }
   
   public chain_ScheduleBatch(final String jobName, final Integer minutesFromNow, final Integer scopeSize){
-    this(scopeSize);
+    super(scopeSize);
     this.jobName = jobName;
     this.minutesFromNow = minutesFromNow > 0 ? minutesFromNow : 1;
   }
