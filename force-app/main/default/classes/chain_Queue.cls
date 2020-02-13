@@ -8,13 +8,7 @@ public inherited sharing abstract class chain_Queue extends chain_Chainable impl
 
   public void execute(QueueableContext qc) {
     this.qc = qc;
-    try {
-      this.job();
-    } catch(Exception ex) {
-      if(this.canBreak == true) {
-        throw ex;
-      }
-    }
+    this.job();
     this.chain();
   }
 

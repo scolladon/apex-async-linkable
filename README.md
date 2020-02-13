@@ -2,10 +2,10 @@
 This library provides all the classes required to chain all kind of Async jobs.
 
 ## Installation
-<a href="https://githubsfdeploy.herokuapp.com?owner=scolladon&repo=apex-chainable">
-  <img alt="Deploy to Salesforce"
-       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
-</a>
+
+```bash
+$ sfdx force:source:deploy -p path/to/source
+```
 
 
 ## Usage

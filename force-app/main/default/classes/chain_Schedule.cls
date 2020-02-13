@@ -17,17 +17,13 @@ public inherited sharing abstract class chain_Schedule extends chain_Chainable i
 
   public void execute(SchedulableContext sc){
     this.sc = sc;
-    try {
-      this.job();
-    } catch(Exception ex) {
-      if(this.canBreak == true) {
-        throw ex;
-      }
-    }
+    this.job();
     this.chain();
   }
 
   public virtual override void executeChain() {
+    // TODO Add priority notion and add the date in the table. (handle the rest of the chain)
+    // TODO the scheduler need to see the date and schedule it close from the date
     System.schedule(this.jobName, this.cronExp, this);
   }
 }

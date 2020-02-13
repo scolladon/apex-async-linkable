@@ -24,13 +24,7 @@ public inherited sharing abstract class chain_Batch extends chain_Chainable impl
   public virtual void execute(Database.BatchableContext bd, List<sObject> scope){
     this.bc = bc;
     this.scope = scope;
-    try {
-      this.job();
-    } catch(Exception ex) {
-      if(this.canBreak == true) {
-        throw ex;
-      }
-    }
+    this.job();
   }
 
   public virtual void finish(Database.BatchableContext bc){
