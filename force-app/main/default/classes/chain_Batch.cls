@@ -32,7 +32,7 @@ public inherited sharing abstract class chain_Batch extends chain_Chainable impl
   }
 
   public virtual override void executeChain() {
-    Database.executeBatch(this);
+    Database.executeBatch(this, this.scopeSize);
   }
 
   public override chain_Chainable add(final chain_Chainable aChain) {
