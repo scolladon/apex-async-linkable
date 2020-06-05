@@ -28,12 +28,12 @@ public inherited sharing abstract class chain_Chainable {
   }*/
 
   public virtual chain_Chainable add(final chain_Chainable aChain) {
-    this.nextJob = aChain;
-    chain_Chainable tempChain = aChain;
-    while(tempChain != null && tempChain.nextJob != null) {
+    chain_Chainable tempChain = this.nextJob;
+    while(tempChain != null) {
       tempChain = tempChain.nextJob;
     }
-    return tempChain;
+    tempChain = aChain;
+    return this;
   }
 
   protected void chain() {
