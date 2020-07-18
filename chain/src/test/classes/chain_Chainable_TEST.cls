@@ -26,7 +26,7 @@ private class chain_Chainable_TEST {
     aChainable.Add(new chain_Queue_TEST());
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawnChain();
     test.stopTest();
   }
 
@@ -35,7 +35,7 @@ private class chain_Chainable_TEST {
     chain_Chainable aChainable = new chain_Queue_TEST();
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawnChain();
     test.stopTest();
   }
 
@@ -44,7 +44,7 @@ private class chain_Chainable_TEST {
     chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test',1,-1);
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawn();
     test.stopTest();
   }
 }

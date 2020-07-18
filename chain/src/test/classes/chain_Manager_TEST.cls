@@ -39,8 +39,8 @@ private class chain_Manager_TEST {
     aChainManager.add(anotherChainManager);
 
     test.startTest();
-    aChainManager.executeChain();
-    anotherChainManager.executeChain(EXECUTOR);
+    aChainManager.spawnChain();
+    anotherChainManager.spawnChain(EXECUTOR);
     test.stopTest();
   }
 }

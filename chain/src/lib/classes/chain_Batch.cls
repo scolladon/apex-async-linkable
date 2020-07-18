@@ -3,6 +3,8 @@ public inherited sharing abstract class chain_Batch extends chain_Chainable impl
   protected Database.BatchableContext bc;
   protected List<sObject> scope;
   protected Integer scopeSize;
+  
+  protected override abstract void job();
 
   public chain_Batch(){
     super();
@@ -10,14 +12,12 @@ public inherited sharing abstract class chain_Batch extends chain_Chainable impl
   }
 
   public chain_Batch(final Integer scopeSize){
-    this();    
-    this.scopeSize = scopeSize;
-    if(this.scopeSize == null || this.scopeSize < 1 || this.scopeSize > chain_Batch.MAX_SCOPE_SIZE) {
-        this.scopeSize = chain_Batch.MAX_SCOPE_SIZE;
-    }
+    super();    
+    this.scopeSize = 
+      (scopeSize == null || scopeSize < 1 || scopeSize > chain_Batch.MAX_SCOPE_SIZE)
+      ? chain_Batch.MAX_SCOPE_SIZE
+      : scopeSize;
   }
-
-  protected override abstract void job();
 
   public abstract Database.QueryLocator start(Database.BatchableContext bc);
 
@@ -27,18 +27,21 @@ public inherited sharing abstract class chain_Batch extends chain_Chainable impl
     this.job();
   }
 
+  public abstract void finish(); // use this.bc
+
   public virtual void finish(Database.BatchableContext bc){
-    this.chain();
+    this.prepareChaining();
+    this.finish();
+    this.spawnChain();
   }
 
-  public virtual override void executeChain() {
+  public virtual override void spawn() {
     Database.executeBatch(this, this.scopeSize);
   }
 
-  public override chain_Chainable add(final chain_Chainable aChain) {
-    if(!(aChain instanceof chain_Future)) {
-      return super.add(aChain);
+  public override void setNext(final chain_Chainable link) {
+    if(!(link instanceof chain_Future)) {
+      super.setNext(link);
     }
-    return this;
   }
 }

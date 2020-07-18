@@ -52,7 +52,7 @@ public class Service {
     chain_Chainable aChain = new chain_Batch_EXAMPLE();
     aChain.Add(new chain_Queue_EXAMPLE());
 
-    aChain.executeChain();
+    aChain.spawnChain();
   }
 }
 ```

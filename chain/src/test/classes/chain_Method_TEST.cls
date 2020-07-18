@@ -25,7 +25,7 @@ public class chain_Method_TEST extends chain_Method {
 
     test.startTest();
     try {
-      aChainable.executeChain();
+      aChainable.spawnChain();
     } catch(chain_MethodException ex){}
     test.stopTest();
   }
@@ -35,7 +35,7 @@ public class chain_Method_TEST extends chain_Method {
     chain_Chainable aChainable = new chain_Method_TEST();
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawnChain();
     test.stopTest();
   }
 }

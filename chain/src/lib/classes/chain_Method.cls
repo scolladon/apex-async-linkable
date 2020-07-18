@@ -1,13 +1,13 @@
 public inherited sharing abstract class chain_Method extends chain_Chainable {
+  protected override abstract void job();
 
   public chain_Method(){
     super();
   }
 
-  protected override abstract void job();
-
-  public virtual override void executeChain() {
+  public virtual override void spawn() {
+    this.prepareChaining();
     this.job();
-    this.chain();
+    this.spawnChain();
   }
 }

@@ -54,7 +54,7 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
     chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test',1,1);
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawnChain();
     test.stopTest();
   }
 }

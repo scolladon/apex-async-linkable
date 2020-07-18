@@ -35,7 +35,7 @@ public class chain_Future_TEST extends chain_Future {
     chain_Chainable aChainable = new chain_Future_TEST();
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawnChain();
     test.stopTest();
   }
 }

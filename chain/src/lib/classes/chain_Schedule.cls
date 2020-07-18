@@ -3,6 +3,8 @@ public inherited sharing abstract class chain_Schedule extends chain_Chainable i
   protected String jobName;
   protected SchedulableContext sc;
 
+  protected override abstract void job();
+
   public chain_Schedule(){
     super();
   }
@@ -13,17 +15,14 @@ public inherited sharing abstract class chain_Schedule extends chain_Chainable i
     this.cronExp = cronExp;
   }
 
-  protected override abstract void job();
-
   public void execute(SchedulableContext sc){
     this.sc = sc;
+    this.prepareChaining();
     this.job();
-    this.chain();
+    this.spawnChain();
   }
 
-  public virtual override void executeChain() {
-    // TODO Add priority notion and add the date in the table. (handle the rest of the chain)
-    // TODO the scheduler need to see the date and schedule it close from the date
+  public virtual override void spawn() {
     System.schedule(this.jobName, this.cronExp, this);
   }
 }

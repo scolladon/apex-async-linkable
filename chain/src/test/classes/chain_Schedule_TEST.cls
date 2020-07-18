@@ -35,7 +35,7 @@ public class chain_Schedule_TEST extends chain_Schedule {
     chain_Chainable aChainable = new chain_Schedule_TEST('test','0 0 * * * ?');
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawnChain();
     test.stopTest();
   }
 }

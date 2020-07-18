@@ -35,7 +35,7 @@ public class chain_Queue_TEST extends chain_Queue {
     chain_Chainable aChainable = new chain_Queue_TEST();
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawnChain();
     test.stopTest();
   }
 }

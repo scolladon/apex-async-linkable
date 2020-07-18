@@ -1,18 +1,21 @@
 public inherited sharing abstract class chain_Queue extends chain_Chainable implements Queueable {
-  protected override abstract void job();
+  
   protected QueueableContext qc;
 
+  protected override abstract void job();
+  
   public chain_Queue(){
     super();
   }
 
   public void execute(QueueableContext qc) {
     this.qc = qc;
+    this.prepareChaining();
     this.job();
-    this.chain();
+    this.spawnChain();
   }
 
-  public virtual override void executeChain() {
+  public virtual override void spawn() {
     System.enqueueJob(this);
   }
 }

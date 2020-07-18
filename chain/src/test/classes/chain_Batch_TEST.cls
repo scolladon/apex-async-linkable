@@ -43,7 +43,7 @@ public class chain_Batch_TEST extends chain_Batch {
     chain_Chainable aChainable = new chain_Batch_TEST();
 
     test.startTest();
-    aChainable.executeChain();
+    aChainable.spawnChain();
     test.stopTest();
   }
 }
