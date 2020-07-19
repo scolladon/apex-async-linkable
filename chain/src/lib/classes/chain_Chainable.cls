@@ -12,16 +12,24 @@ public inherited sharing abstract class chain_Chainable {
   }
 
   protected virtual void prepareChaining() {
-    chain_Manager.CM.registerExecutor(this.internalExecutor);
-    chain_Manager.CM.add(this.nextLink);
+    chain_Manager.instance.registerExecutor(this.internalExecutor);
+    chain_Manager.instance.add(this.nextLink);
   }
 
   protected void spawnChain() {
-    chain_Manager.CM.spawnChain(this.internalExecutor);
+    chain_Manager.instance.spawnChain(this.internalExecutor);
   }
 
   public virtual void setNext(final chain_Chainable link) {
     this.nextLink = link;
+  }
+
+  public virtual chain_Chainable getNext() {
+    return this.nextLink;
+  }
+
+  public virtual Boolean hasNext() {
+    return this.getNext() != null;
   }
 }
 
