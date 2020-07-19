@@ -11,7 +11,6 @@ public class chain_Queue_TEST extends chain_Queue {
   }
 
   protected override void job() {
-    System.Debug('chain_Queue_TEST');
     if(this.canBreak == true) {
       throw new chain_QueueException();
     }
@@ -35,7 +34,7 @@ public class chain_Queue_TEST extends chain_Queue {
     chain_Chainable aChainable = new chain_Queue_TEST();
 
     test.startTest();
-    aChainable.spawnChain();
+    aChainable.spawn();
     test.stopTest();
   }
 }

@@ -15,7 +15,7 @@ public inherited sharing abstract class chain_Queue extends chain_Chainable impl
     this.spawnChain();
   }
 
-  public virtual override void spawn() {
-    System.enqueueJob(this);
+  public virtual override Id spawn() {
+    return System.enqueueJob(this);
   }
 }

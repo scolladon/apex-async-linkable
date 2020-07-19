@@ -19,7 +19,7 @@ public inherited sharing abstract class chain_ScheduleBatch extends chain_Batch 
     this.minutesFromNow = minutesFromNow > 0 ? minutesFromNow : 1;
   }
 
-  public virtual override void spawn() {
-    System.scheduleBatch(this, this.jobName, this.minutesFromNow, this.scopeSize);
+  public virtual override Id spawn() {
+    return System.scheduleBatch(this, this.jobName, this.minutesFromNow, this.scopeSize);
   }
 }

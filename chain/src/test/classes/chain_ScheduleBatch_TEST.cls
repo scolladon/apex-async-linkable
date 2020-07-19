@@ -1,12 +1,12 @@
 @isTest
 public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
 
-  public chain_ScheduleBatch_TEST(final String jobName, final Integer minutesFromNow, final Integer scopeSize){
-    super(jobName,minutesFromNow,scopeSize);
+  public chain_ScheduleBatch_TEST(final String jobName, final Integer minutesFromNow){
+    super(jobName,minutesFromNow);
   }
 
   public chain_ScheduleBatch_TEST(final String jobName, final Integer minutesFromNow, final Integer scopeSize, final boolean canBreak){
-    this(jobName,minutesFromNow,scopeSize);
+    super(jobName,minutesFromNow,scopeSize);
     this.canBreak = canBreak;
   }
 
@@ -14,20 +14,13 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
     return Database.getQueryLocator('select id from account limit 1');
   }
 
-  public chain_ScheduleBatch_TEST(){
-    super();
-  }
-
-  public chain_ScheduleBatch_TEST(final boolean canBreak){
-    this();
-    this.canBreak = canBreak;
-  }
-
   protected override void job() {
-    System.Debug('chain_ScheduleBatch_TEST');
     if(this.canBreak == true) {
       throw new chain_ScheduleBatchException();
     }
+  }
+
+  protected override void finish() {
   }
 
   public class chain_ScheduleBatchException extends Exception{}
@@ -39,8 +32,7 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
 
   @isTest
   static void testFail() {
-    chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST();
-    aChainable = new chain_ScheduleBatch_TEST('test',1,1,true);
+    chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST('test',1,1,true);
 
     test.startTest();
     try {
@@ -51,10 +43,10 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
 
   @isTest
   static void testSuccess() {
-    chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test',1,1);
+    chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test',1);
 
     test.startTest();
-    aChainable.spawnChain();
+    aChainable.spawn();
     test.stopTest();
   }
 }

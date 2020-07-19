@@ -27,16 +27,17 @@ public inherited sharing abstract class chain_Batch extends chain_Chainable impl
     this.job();
   }
 
-  public abstract void finish(); // use this.bc
+  protected abstract void finish();
 
   public virtual void finish(Database.BatchableContext bc){
+    this.bc = bc;
     this.prepareChaining();
     this.finish();
     this.spawnChain();
   }
 
-  public virtual override void spawn() {
-    Database.executeBatch(this, this.scopeSize);
+  public virtual override Id spawn() {
+    return Database.executeBatch(this, this.scopeSize);
   }
 
   public override void setNext(final chain_Chainable link) {

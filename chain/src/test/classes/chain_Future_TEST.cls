@@ -11,7 +11,6 @@ public class chain_Future_TEST extends chain_Future {
   }
 
   protected override void job() {
-    System.Debug('chain_Future_TEST');
     if(this.canBreak == true) {
       throw new chain_FutureException();
     }
@@ -35,7 +34,7 @@ public class chain_Future_TEST extends chain_Future {
     chain_Chainable aChainable = new chain_Future_TEST();
 
     test.startTest();
-    aChainable.spawnChain();
+    aChainable.spawn();
     test.stopTest();
   }
 }

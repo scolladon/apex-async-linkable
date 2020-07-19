@@ -7,26 +7,25 @@ private class chain_Chainable_TEST {
 
   @isTest
   static void testAll() {
-    chain_Chainable aChainable = new chain_Method_TEST();
-
-    chain_Chainable anotherChainable = new chain_Method_TEST();
-    anotherChainable.add(new chain_Method_TEST());
-
-    aChainable
-    .Add(anotherChainable)
-    .Add(new chain_Method_TEST())
-    .Add(new chain_Batch_TEST())
-    .Add(new chain_Future_TEST())
-    .Add(new chain_Schedule_TEST('test','0 0 * * * ?'))
-    .Add(new chain_Future_TEST())
-    .Add(new chain_Future_TEST())
-    .Add(new chain_ScheduleBatch_TEST('test',1,1));
-
-    aChainable.Add(new chain_Future_TEST());
-    aChainable.Add(new chain_Queue_TEST());
+    chain_Chainable aBatch1 = new chain_Batch_TEST();
+    chain_Chainable aFuture1 = new chain_Future_TEST();
+    chain_Chainable aSchedule1 = new chain_Schedule_TEST('test','0 0 * * * ?');
+    chain_Chainable aFuture2 = new chain_Future_TEST();
+    chain_Chainable aFuture3 = new chain_Future_TEST();
+    chain_Chainable aScheduleBatch1 = new chain_ScheduleBatch_TEST('test',1);
+    chain_Chainable aFuture4 = new chain_Future_TEST();
+    chain_Chainable aQueue1 = new chain_Queue_TEST();
+    
+    aBatch1.setNext(aFuture1);
+    aFuture1.setNext(aSchedule1);
+    aSchedule1.setNext(aFuture2);
+    aFuture2.setNext(aFuture3);
+    aFuture3.setNext(aScheduleBatch1);
+    aScheduleBatch1.setNext(aFuture4);
+    aFuture4.setNext(aQueue1);
 
     test.startTest();
-    aChainable.spawnChain();
+    aBatch1.spawn();
     test.stopTest();
   }
 
@@ -35,13 +34,13 @@ private class chain_Chainable_TEST {
     chain_Chainable aChainable = new chain_Queue_TEST();
 
     test.startTest();
-    aChainable.spawnChain();
+    aChainable.spawn();
     test.stopTest();
   }
 
     @isTest
   static void testScheduleBatch() {
-    chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test',1,-1);
+    chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test',1);
 
     test.startTest();
     aChainable.spawn();

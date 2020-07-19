@@ -22,7 +22,7 @@ public inherited sharing abstract class chain_Schedule extends chain_Chainable i
     this.spawnChain();
   }
 
-  public virtual override void spawn() {
-    System.schedule(this.jobName, this.cronExp, this);
+  public virtual override Id spawn() {
+    return System.schedule(this.jobName, this.cronExp, this);
   }
 }

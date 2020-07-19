@@ -3,7 +3,7 @@ public inherited sharing abstract class chain_Chainable {
   protected boolean canBreak;
   protected String internalExecutor;
 
-  public abstract void spawn();
+  public abstract Id spawn();
   protected abstract void job();
   
   public chain_Chainable() {

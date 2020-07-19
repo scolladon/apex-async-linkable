@@ -8,16 +8,22 @@ public class chain_Batch_TEST extends chain_Batch {
     super();
   }
 
+  public chain_Batch_TEST(final Integer scopeSize){
+    super(scopeSize);
+  }
+
   public chain_Batch_TEST(final boolean canBreak){
     this();
     this.canBreak = canBreak;
   }
 
   protected override void job() {
-    System.Debug('chain_Batch_TEST');
     if(this.canBreak == true) {
       throw new chain_BatchException();
     }
+  }
+
+  protected override void finish() {
   }
 
   public class chain_BatchException extends Exception{}
@@ -38,12 +44,19 @@ public class chain_Batch_TEST extends chain_Batch {
     test.stopTest();
   }
 
-  @isTest
-  static void testSuccess() {
+  @isTest static void testSuccess() {
     chain_Chainable aChainable = new chain_Batch_TEST();
 
     test.startTest();
-    aChainable.spawnChain();
+    aChainable.spawn();
+    test.stopTest();
+  }
+
+  @isTest static void testSuccessScope() {
+    chain_Chainable aChainable = new chain_Batch_TEST(-1);
+
+    test.startTest();
+    aChainable.spawn();
     test.stopTest();
   }
 }

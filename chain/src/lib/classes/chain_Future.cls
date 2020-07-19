@@ -1,4 +1,4 @@
-public inherited sharing abstract class chain_Future extends chain_Method {
+public inherited sharing abstract class chain_Future extends chain_Chainable {
   protected override abstract void job();
 
   public chain_Future() {
@@ -11,12 +11,16 @@ public inherited sharing abstract class chain_Future extends chain_Method {
     aFutureMethod.doExecute();
   }
 
-  public virtual override void spawn() {
+  public virtual override Id spawn() {
     chain_Future.execute(String.valueOf(this).split(':')[0]);
+    return null; // TODO implement query to get information
+    // SELECT Id  FROM AsyncApexJob where MethodName='method_name' And ApexClassId='apex_Id' order by createddate desc
   }
 
   public void doExecute() {
-    super.spawn();
+    this.prepareChaining();
+    this.job();
+    this.spawnChain();
   }
 
   public override void setNext(chain_Chainable link) {

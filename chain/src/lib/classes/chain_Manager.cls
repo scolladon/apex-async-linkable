@@ -27,51 +27,59 @@ public inherited sharing class chain_Manager {
   /*******************************************************************************************************
   * @description Execute the first job of the chain to trigger all the chain if no executor is registered
   */
-  public chain_Manager spawnChain() {
+  public Id spawnChain() {
     if(String.isBlank(this.executor)) {
-      this.doSpawnChain();
+      return this.doSpawnChain();
     }
-    return this;
+    return null;
   }
 
   /*******************************************************************************************************
   * @description Execute the first job of the chain to trigger all the chain if the executor specified
   * is the one registered
   */
-  public chain_Manager spawnChain(final String identifier) {
+  public Id spawnChain(final String identifier) {
     if(identifier == this.executor) {
-      this.doSpawnChain();
+      return this.doSpawnChain();
     }
-    return this;
+    return null;
   }
 
   /*******************************************************************************************************
   * @description logic to run the chain
   */
-  private void doSpawnChain() {
+  private Id doSpawnChain() {
+    Id jobId;
     if(this.start != null) {
-      this.start.spawn();
+      jobId = this.start.spawn();
       this.clear();
     }
     this.executor = null;
+    return jobId;
   }
 
   public chain_Manager add(final chain_Chainable link) {
     if(link == null) {
       return this;
     }
-    link.setNext(null);
     if(this.start == null) {
       this.start = link;
     } else {
       this.last.setNext(link); 
     }
-    this.last = chain_Manager.getLastLink(link);
+    chain_Chainable tmpLink = link;
+    while(tmpLink.hasNext()) {
+      tmpLink = tmpLink.getNext();
+    }
+    this.last = tmpLink;
     
     return this;
   }
 
   public chain_Manager add(final chain_Manager chainManager) {
+    if(chainManager == null) {
+      return this;
+    }
     return this.add(chainManager.start);
   }
 
