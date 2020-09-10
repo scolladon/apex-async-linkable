@@ -36,31 +36,35 @@ public class chain_Batch_TEST extends chain_Batch {
 
   @isTest
   static void testFail() {
-    chain_Batch_TEST aChainable = new chain_Batch_TEST(true);
+    final chain_Batch_TEST aChainable = new chain_Batch_TEST(true);
 
     test.startTest();
     try {
       aChainable.execute(null, null);
+      System.Assert(false, 'should not be executed');
     } catch (chain_BatchException ex) {
+      System.AssertNotEquals(null, ex, 'Exception should be thrown');
     }
     test.stopTest();
   }
 
   @isTest
   static void testSuccess() {
-    chain_Chainable aChainable = new chain_Batch_TEST();
+    final chain_Chainable aChainable = new chain_Batch_TEST();
 
     test.startTest();
-    aChainable.spawn();
+    final Id jobId = aChainable.spawn();
     test.stopTest();
+    System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 
   @isTest
   static void testSuccessScope() {
-    chain_Chainable aChainable = new chain_Batch_TEST(-1);
+    final chain_Chainable aChainable = new chain_Batch_TEST(-1);
 
     test.startTest();
-    aChainable.spawn();
+    final Id jobId = aChainable.spawn();
     test.stopTest();
+    System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 }

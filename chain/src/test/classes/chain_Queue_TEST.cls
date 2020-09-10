@@ -20,22 +20,25 @@ public class chain_Queue_TEST extends chain_Queue {
 
   @isTest
   static void testFail() {
-    chain_Queue_TEST aChainable = new chain_Queue_TEST(true);
+    final chain_Queue_TEST aChainable = new chain_Queue_TEST(true);
 
     test.startTest();
     try {
       aChainable.execute(null);
+      System.Assert(false, 'should not be executed');
     } catch (chain_QueueException ex) {
+      System.AssertNotEquals(null, ex, 'Exception should be thrown');
     }
     test.stopTest();
   }
 
   @isTest
   static void testSuccess() {
-    chain_Chainable aChainable = new chain_Queue_TEST();
+    final chain_Chainable aChainable = new chain_Queue_TEST();
 
     test.startTest();
-    aChainable.spawn();
+    final Id jobId = aChainable.spawn();
     test.stopTest();
+    System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 }

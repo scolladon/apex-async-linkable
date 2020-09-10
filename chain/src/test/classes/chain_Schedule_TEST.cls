@@ -24,7 +24,7 @@ public class chain_Schedule_TEST extends chain_Schedule {
 
   @isTest
   static void testFail() {
-    chain_Schedule_TEST aChainable = new chain_Schedule_TEST(
+    final chain_Schedule_TEST aChainable = new chain_Schedule_TEST(
       'test',
       '0 0 * * * ?',
       true
@@ -33,17 +33,23 @@ public class chain_Schedule_TEST extends chain_Schedule {
     test.startTest();
     try {
       aChainable.execute(null);
+      System.Assert(false, 'should not be executed');
     } catch (chain_ScheduleException ex) {
+      System.AssertNotEquals(null, ex, 'Exception should be thrown');
     }
     test.stopTest();
   }
 
   @isTest
   static void testSuccess() {
-    chain_Chainable aChainable = new chain_Schedule_TEST('test', '0 0 * * * ?');
+    final chain_Chainable aChainable = new chain_Schedule_TEST(
+      'test',
+      '0 0 * * * ?'
+    );
 
     test.startTest();
-    aChainable.spawn();
+    final Id jobId = aChainable.spawn();
     test.stopTest();
+    System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 }

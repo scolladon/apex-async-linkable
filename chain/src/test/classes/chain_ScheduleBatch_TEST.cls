@@ -40,7 +40,7 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch {
 
   @isTest
   static void testFail() {
-    chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST(
+    final chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST(
       'test',
       1,
       1,
@@ -50,17 +50,20 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch {
     test.startTest();
     try {
       aChainable.execute(null, null);
+      System.Assert(false, 'should not be executed');
     } catch (chain_ScheduleBatchException ex) {
+      System.AssertNotEquals(null, ex, 'Exception should be thrown');
     }
     test.stopTest();
   }
 
   @isTest
   static void testSuccess() {
-    chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test', 1);
+    final chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test', 1);
 
     test.startTest();
-    aChainable.spawn();
+    final Id jobId = aChainable.spawn();
     test.stopTest();
+    System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 }

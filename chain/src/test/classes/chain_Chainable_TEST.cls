@@ -25,25 +25,28 @@ private class chain_Chainable_TEST {
     aFuture4.setNext(aQueue1);
 
     test.startTest();
-    aBatch1.spawn();
+    final Id jobId = aBatch1.spawn();
     test.stopTest();
+    System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 
   @isTest
   static void testQueue() {
-    chain_Chainable aChainable = new chain_Queue_TEST();
+    final chain_Chainable aChainable = new chain_Queue_TEST();
 
     test.startTest();
-    aChainable.spawn();
+    final Id jobId = aChainable.spawn();
     test.stopTest();
+    System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 
   @isTest
   static void testScheduleBatch() {
-    chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test', 1);
+    final chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test', 1);
 
     test.startTest();
-    aChainable.spawn();
+    final Id jobId = aChainable.spawn();
     test.stopTest();
+    System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 }
