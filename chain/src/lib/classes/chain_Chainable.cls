@@ -5,10 +5,13 @@ public inherited sharing abstract class chain_Chainable {
 
   public abstract Id spawn();
   protected abstract void job();
-  
+
   public chain_Chainable() {
     this.canBreak = false;
-    this.internalExecutor = EncodingUtil.convertToHex(Crypto.generateAesKey(128)).substring(0, 32);
+    this.internalExecutor = EncodingUtil.convertToHex(
+        Crypto.generateAesKey(128)
+      )
+      .substring(0, 32);
   }
 
   protected virtual void prepareChaining() {
@@ -32,4 +35,3 @@ public inherited sharing abstract class chain_Chainable {
     return this.getNext() != null;
   }
 }
-

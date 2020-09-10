@@ -1,22 +1,22 @@
 @isTest
 public class chain_Future_TEST extends chain_Future {
-
-  public chain_Future_TEST(){
+  public chain_Future_TEST() {
     super();
   }
 
-  public chain_Future_TEST(final boolean canBreak){
+  public chain_Future_TEST(final boolean canBreak) {
     this();
     this.canBreak = canBreak;
   }
 
   protected override void job() {
-    if(this.canBreak == true) {
+    if (this.canBreak == true) {
       throw new chain_FutureException();
     }
   }
 
-  public class chain_FutureException extends Exception{}
+  public class chain_FutureException extends Exception {
+  }
 
   @isTest
   static void testFail() {
@@ -25,7 +25,8 @@ public class chain_Future_TEST extends chain_Future {
     test.startTest();
     try {
       aChainable.job();
-    } catch(chain_FutureException ex){}
+    } catch (chain_FutureException ex) {
+    }
     test.stopTest();
   }
 

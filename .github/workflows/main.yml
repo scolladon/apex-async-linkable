@@ -30,7 +30,7 @@ jobs:
       - name: Execute PMD
         run: pmd-bin-6.22.0/bin/run.sh pmd -minimumpriority 2 -d force-app -R apex-ruleset.xml -f text -l apex
 
-  scratch-org-test:
+  ci-build:
     runs-on: ubuntu-latest
     steps:
       - name: Install Salesforce CLI
@@ -45,7 +45,7 @@ jobs:
 
       - name: "Populate auth file with CI_URL secret"
         shell: bash
-        run: "echo ${{ secrets.DEVHUB_SFDX_URL}} > ./CI_URL.txt"
+        run: "echo ${{ secrets.CI_URL}} > ./CI_URL.txt"
 
       - name: "Authenticate CI Sandbox"
         run: "sfdx force:auth:sfdxurl:store -f ./CI_URL.txt -a ci -d"

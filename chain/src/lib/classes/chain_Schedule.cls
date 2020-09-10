@@ -5,17 +5,17 @@ public inherited sharing abstract class chain_Schedule extends chain_Chainable i
 
   protected override abstract void job();
 
-  public chain_Schedule(){
+  public chain_Schedule() {
     super();
   }
 
-  public chain_Schedule(final String jobName, final String cronExp){
+  public chain_Schedule(final String jobName, final String cronExp) {
     this();
     this.jobName = jobName;
     this.cronExp = cronExp;
   }
 
-  public void execute(SchedulableContext sc){
+  public void execute(SchedulableContext sc) {
     this.sc = sc;
     this.prepareChaining();
     this.job();

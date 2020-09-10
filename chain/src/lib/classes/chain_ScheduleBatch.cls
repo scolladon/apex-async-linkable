@@ -4,14 +4,21 @@ public inherited sharing abstract class chain_ScheduleBatch extends chain_Batch 
 
   protected override abstract void job();
 
-  public chain_ScheduleBatch(final String jobName, final Integer minutesFromNow){
+  public chain_ScheduleBatch(
+    final String jobName,
+    final Integer minutesFromNow
+  ) {
     super();
-    this.init(jobName,minutesFromNow);
+    this.init(jobName, minutesFromNow);
   }
-  
-  public chain_ScheduleBatch(final String jobName, final Integer minutesFromNow, final Integer scopeSize){
+
+  public chain_ScheduleBatch(
+    final String jobName,
+    final Integer minutesFromNow,
+    final Integer scopeSize
+  ) {
     super(scopeSize);
-    this.init(jobName,minutesFromNow);
+    this.init(jobName, minutesFromNow);
   }
 
   protected void init(final String jobName, final Integer minutesFromNow) {
@@ -20,6 +27,11 @@ public inherited sharing abstract class chain_ScheduleBatch extends chain_Batch 
   }
 
   public virtual override Id spawn() {
-    return System.scheduleBatch(this, this.jobName, this.minutesFromNow, this.scopeSize);
+    return System.scheduleBatch(
+      this,
+      this.jobName,
+      this.minutesFromNow,
+      this.scopeSize
+    );
   }
 }

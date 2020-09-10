@@ -7,7 +7,8 @@ public inherited sharing abstract class chain_Future extends chain_Chainable {
 
   @Future(callout=true)
   private static void execute(String className) {
-    chain_Future aFutureMethod = (chain_Future) Type.forName(className).newInstance();
+    chain_Future aFutureMethod = (chain_Future) Type.forName(className)
+      .newInstance();
     aFutureMethod.doExecute();
   }
 
@@ -24,7 +25,7 @@ public inherited sharing abstract class chain_Future extends chain_Chainable {
   }
 
   public override void setNext(chain_Chainable link) {
-    if(!(link instanceof chain_Future)) {
+    if (!(link instanceof chain_Future)) {
       super.setNext(link);
     }
   }

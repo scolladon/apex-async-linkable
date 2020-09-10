@@ -1,12 +1,19 @@
 @isTest
-public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
-
-  public chain_ScheduleBatch_TEST(final String jobName, final Integer minutesFromNow){
-    super(jobName,minutesFromNow);
+public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch {
+  public chain_ScheduleBatch_TEST(
+    final String jobName,
+    final Integer minutesFromNow
+  ) {
+    super(jobName, minutesFromNow);
   }
 
-  public chain_ScheduleBatch_TEST(final String jobName, final Integer minutesFromNow, final Integer scopeSize, final boolean canBreak){
-    super(jobName,minutesFromNow,scopeSize);
+  public chain_ScheduleBatch_TEST(
+    final String jobName,
+    final Integer minutesFromNow,
+    final Integer scopeSize,
+    final boolean canBreak
+  ) {
+    super(jobName, minutesFromNow, scopeSize);
     this.canBreak = canBreak;
   }
 
@@ -15,7 +22,7 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
   }
 
   protected override void job() {
-    if(this.canBreak == true) {
+    if (this.canBreak == true) {
       throw new chain_ScheduleBatchException();
     }
   }
@@ -23,27 +30,34 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch{
   protected override void finish() {
   }
 
-  public class chain_ScheduleBatchException extends Exception{}
+  public class chain_ScheduleBatchException extends Exception {
+  }
 
   @testSetup
-  static void setup(){
-    insert new Account(name='test');
+  static void setup() {
+    insert new Account(name = 'test');
   }
 
   @isTest
   static void testFail() {
-    chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST('test',1,1,true);
+    chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST(
+      'test',
+      1,
+      1,
+      true
+    );
 
     test.startTest();
     try {
-      aChainable.execute(null,null);
-    } catch(chain_ScheduleBatchException ex){}
+      aChainable.execute(null, null);
+    } catch (chain_ScheduleBatchException ex) {
+    }
     test.stopTest();
   }
 
   @isTest
   static void testSuccess() {
-    chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test',1);
+    chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test', 1);
 
     test.startTest();
     aChainable.spawn();

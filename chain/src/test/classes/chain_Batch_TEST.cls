@@ -4,21 +4,21 @@ public class chain_Batch_TEST extends chain_Batch {
     return Database.getQueryLocator('select id from account limit 1');
   }
 
-  public chain_Batch_TEST(){
+  public chain_Batch_TEST() {
     super();
   }
 
-  public chain_Batch_TEST(final Integer scopeSize){
+  public chain_Batch_TEST(final Integer scopeSize) {
     super(scopeSize);
   }
 
-  public chain_Batch_TEST(final boolean canBreak){
+  public chain_Batch_TEST(final boolean canBreak) {
     this();
     this.canBreak = canBreak;
   }
 
   protected override void job() {
-    if(this.canBreak == true) {
+    if (this.canBreak == true) {
       throw new chain_BatchException();
     }
   }
@@ -26,11 +26,12 @@ public class chain_Batch_TEST extends chain_Batch {
   protected override void finish() {
   }
 
-  public class chain_BatchException extends Exception{}
+  public class chain_BatchException extends Exception {
+  }
 
   @testSetup
-  static void setup(){
-    insert new Account(name='test');
+  static void setup() {
+    insert new Account(name = 'test');
   }
 
   @isTest
@@ -39,12 +40,14 @@ public class chain_Batch_TEST extends chain_Batch {
 
     test.startTest();
     try {
-      aChainable.execute(null,null);
-    } catch(chain_BatchException ex){}
+      aChainable.execute(null, null);
+    } catch (chain_BatchException ex) {
+    }
     test.stopTest();
   }
 
-  @isTest static void testSuccess() {
+  @isTest
+  static void testSuccess() {
     chain_Chainable aChainable = new chain_Batch_TEST();
 
     test.startTest();
@@ -52,7 +55,8 @@ public class chain_Batch_TEST extends chain_Batch {
     test.stopTest();
   }
 
-  @isTest static void testSuccessScope() {
+  @isTest
+  static void testSuccessScope() {
     chain_Chainable aChainable = new chain_Batch_TEST(-1);
 
     test.startTest();
