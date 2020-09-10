@@ -5,9 +5,11 @@
   "author": "Sebastien Colladon <colladonsebastien@gmail.com>",
   "keyword": [
     "salesforce",
-    "package",
-    "git",
-    "sfdx"
+    "async",
+    "future",
+    "batch",
+    "schedule",
+    "queue"
   ],
   "repository": {
     "type": "git",
