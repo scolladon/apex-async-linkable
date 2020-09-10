@@ -28,7 +28,7 @@ jobs:
         run: wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.22.0/pmd-bin-6.22.0.zip && unzip pmd-bin-6.22.0.zip
 
       - name: Execute PMD
-        run: pmd-bin-6.22.0/bin/run.sh pmd -minimumpriority 2 -d force-app -R apex-ruleset.xml -f text -l apex
+        run: pmd-bin-6.22.0/bin/run.sh pmd -minimumpriority 2 -d chain -R apex-ruleset.xml -f text -l apex
 
   ci-build:
     runs-on: ubuntu-latest
@@ -51,4 +51,4 @@ jobs:
         run: "sfdx force:auth:sfdxurl:store -f ./CI_URL.txt -a ci -d"
 
       - name: "Validate source to CI"
-        run: "sfdx force:source:deploy -p chain -a ci -c -l RunSpecifiedTests -r chain"
+        run: "sfdx force:source:deploy -p chain -u ci -c -l RunSpecifiedTests -r chain"
