@@ -249,26 +249,6 @@
         <priority>2</priority>
     </rule>
 
-    <!-- Performance -->
-    <rule
-    ref="category/apex/performance.xml/AvoidDmlStatementsInLoops"
-    message="Avoid DML Statements inside loops"
-  >
-        <priority>1</priority>
-    </rule>
-    <rule
-    ref="category/apex/performance.xml/AvoidSoqlInLoops"
-    message="Avoid Soql queries inside loops"
-  >
-        <priority>1</priority>
-    </rule>
-    <rule
-    ref="category/apex/performance.xml/AvoidSoslInLoops"
-    message="Avoid Sosl queries inside loops"
-  >
-        <priority>1</priority>
-    </rule>
-
     <!-- Security -->
     <rule
     ref="category/apex/security.xml/ApexBadCrypto"
