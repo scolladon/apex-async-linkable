@@ -25,8 +25,8 @@
   },
   "scripts": {
     "lint": "pmd pmd -minimumpriority 2 -d chain -R apex-ruleset.xml -f text -l apex",
-    "test": "sfdx force:apex:test:run -r tap -d ./tests/apex -s lwcc -w 20",
-    "test:coverage": "sfdx force:apex:test:run -r tap -d ./tests/apex -s chain -w 20 -c",
+    "test": "sfdx force:apex:test:run -r tap -d ./tests/apex -s chainLibrary -w 20",
+    "test:coverage": "sfdx force:apex:test:run -r tap -d ./tests/apex -s chainLibrary -w 20 -c",
     "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\""
   },

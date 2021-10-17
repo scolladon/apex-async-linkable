@@ -1,19 +1,19 @@
-public inherited sharing abstract class chain_Future extends chain_Chainable {
+public inherited sharing abstract class FutureLink extends AsyncLinkable {
   protected override abstract void job();
 
-  public chain_Future() {
+  public FutureLink() {
     super();
   }
 
   @Future(callout=true)
   private static void execute(String className) {
-    chain_Future aFutureMethod = (chain_Future) Type.forName(className)
+    FutureLink aFutureLinkMethod = (FutureLink) Type.forName(className)
       .newInstance();
-    aFutureMethod.doExecute();
+    aFutureLinkMethod.doExecute();
   }
 
   public virtual override Id spawn() {
-    chain_Future.execute(String.valueOf(this).split(':')[0]);
+    FutureLink.execute(String.valueOf(this).split(':')[0]);
     return null; // TODO implement query to get information
     // SELECT Id  FROM AsyncApexJob where MethodName='method_name' And ApexClassId='apex_Id' order by createddate desc
   }
@@ -21,11 +21,11 @@ public inherited sharing abstract class chain_Future extends chain_Chainable {
   public void doExecute() {
     this.prepareChaining();
     this.job();
-    this.spawnChain();
+    this.startChain();
   }
 
-  public override void setNext(chain_Chainable link) {
-    if (!(link instanceof chain_Future)) {
+  public override void setNext(AsyncLinkable link) {
+    if (!(link instanceof FutureLink)) {
       super.setNext(link);
     }
   }

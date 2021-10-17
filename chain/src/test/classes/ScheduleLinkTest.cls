@@ -1,6 +1,6 @@
 @isTest
-public class chain_Schedule_TEST extends chain_Schedule {
-  public chain_Schedule_TEST(
+public class ScheduleLinkTest extends ScheduleLink {
+  public ScheduleLinkTest(
     final String jobName,
     final String cronExp,
     final boolean canBreak
@@ -9,22 +9,22 @@ public class chain_Schedule_TEST extends chain_Schedule {
     this.canBreak = canBreak;
   }
 
-  public chain_Schedule_TEST(final String jobName, final String cronExp) {
+  public ScheduleLinkTest(final String jobName, final String cronExp) {
     super(jobName, cronExp);
   }
 
   protected override void job() {
     if (this.canBreak == true) {
-      throw new chain_ScheduleException();
+      throw new ScheduleLinkException();
     }
   }
 
-  public class chain_ScheduleException extends Exception {
+  public class ScheduleLinkException extends Exception {
   }
 
   @isTest
   static void testFail() {
-    final chain_Schedule_TEST aChainable = new chain_Schedule_TEST(
+    final ScheduleLinkTest aAsyncLinkable = new ScheduleLinkTest(
       'test',
       '0 0 * * * ?',
       true
@@ -32,9 +32,9 @@ public class chain_Schedule_TEST extends chain_Schedule {
 
     test.startTest();
     try {
-      aChainable.execute(null);
+      aAsyncLinkable.execute(null);
       System.Assert(false, 'should not be executed');
-    } catch (chain_ScheduleException ex) {
+    } catch (ScheduleLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
     }
     test.stopTest();
@@ -42,13 +42,13 @@ public class chain_Schedule_TEST extends chain_Schedule {
 
   @isTest
   static void testSuccess() {
-    final chain_Chainable aChainable = new chain_Schedule_TEST(
+    final AsyncLinkable aAsyncLinkable = new ScheduleLinkTest(
       'test',
       '0 0 * * * ?'
     );
 
     test.startTest();
-    final Id jobId = aChainable.spawn();
+    final Id jobId = aAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }

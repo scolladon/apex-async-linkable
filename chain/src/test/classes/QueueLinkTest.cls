@@ -1,32 +1,32 @@
 @isTest
-public class chain_Queue_TEST extends chain_Queue {
-  public chain_Queue_TEST() {
+public class QueueLinkTest extends QueueLink {
+  public QueueLinkTest() {
     super();
   }
 
-  public chain_Queue_TEST(final boolean canBreak) {
+  public QueueLinkTest(final boolean canBreak) {
     this();
     this.canBreak = canBreak;
   }
 
   protected override void job() {
     if (this.canBreak == true) {
-      throw new chain_QueueException();
+      throw new QueueLinkException();
     }
   }
 
-  public class chain_QueueException extends Exception {
+  public class QueueLinkException extends Exception {
   }
 
   @isTest
   static void testFail() {
-    final chain_Queue_TEST aChainable = new chain_Queue_TEST(true);
+    final QueueLinkTest aAsyncLinkable = new QueueLinkTest(true);
 
     test.startTest();
     try {
-      aChainable.execute(null);
+      aAsyncLinkable.execute(null);
       System.Assert(false, 'should not be executed');
-    } catch (chain_QueueException ex) {
+    } catch (QueueLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
     }
     test.stopTest();
@@ -34,10 +34,10 @@ public class chain_Queue_TEST extends chain_Queue {
 
   @isTest
   static void testSuccess() {
-    final chain_Chainable aChainable = new chain_Queue_TEST();
+    final AsyncLinkable aAsyncLinkable = new QueueLinkTest();
 
     test.startTest();
-    final Id jobId = aChainable.spawn();
+    final Id jobId = aAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }

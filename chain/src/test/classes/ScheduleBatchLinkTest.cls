@@ -1,13 +1,13 @@
 @isTest
-public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch {
-  public chain_ScheduleBatch_TEST(
+public class ScheduleBatchLinkTest extends ScheduleBatchLink {
+  public ScheduleBatchLinkTest(
     final String jobName,
     final Integer minutesFromNow
   ) {
     super(jobName, minutesFromNow);
   }
 
-  public chain_ScheduleBatch_TEST(
+  public ScheduleBatchLinkTest(
     final String jobName,
     final Integer minutesFromNow,
     final Integer scopeSize,
@@ -23,14 +23,14 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch {
 
   protected override void job() {
     if (this.canBreak == true) {
-      throw new chain_ScheduleBatchException();
+      throw new ScheduleBatchLinkException();
     }
   }
 
   protected override void finish() {
   }
 
-  public class chain_ScheduleBatchException extends Exception {
+  public class ScheduleBatchLinkException extends Exception {
   }
 
   @testSetup
@@ -40,7 +40,7 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch {
 
   @isTest
   static void testFail() {
-    final chain_ScheduleBatch_TEST aChainable = new chain_ScheduleBatch_TEST(
+    final ScheduleBatchLinkTest aAsyncLinkable = new ScheduleBatchLinkTest(
       'test',
       1,
       1,
@@ -49,9 +49,9 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch {
 
     test.startTest();
     try {
-      aChainable.execute(null, null);
+      aAsyncLinkable.execute(null, null);
       System.Assert(false, 'should not be executed');
-    } catch (chain_ScheduleBatchException ex) {
+    } catch (ScheduleBatchLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
     }
     test.stopTest();
@@ -59,10 +59,10 @@ public class chain_ScheduleBatch_TEST extends chain_ScheduleBatch {
 
   @isTest
   static void testSuccess() {
-    final chain_Chainable aChainable = new chain_ScheduleBatch_TEST('test', 1);
+    final AsyncLinkable aAsyncLinkable = new ScheduleBatchLinkTest('test', 1);
 
     test.startTest();
-    final Id jobId = aChainable.spawn();
+    final Id jobId = aAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }

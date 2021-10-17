@@ -2,18 +2,18 @@ public with sharing class AccountServiceSimple {
   public static void handleUpdate(final List<Account> accounts) {
     // Handle business logic
     // Share information to external system
-    chain_Manager.instance.add(new BigOpportunityCalcul(accounts));
-    chain_Manager.instance.spawnChain(); // Not spawned if an executor has been registered
+    ChainManager.instance.add(new BigOpportunityCalcul(accounts));
+    ChainManager.instance.startChain(); // Not spawned if an executor has been registered
   }
 
   public static void handleSharing(final List<Account> accounts) {
     // Handle business logic
     // Spawn a sharing calculation
-    chain_Manager.instance.add(new AccountSharingDelegate(accounts));
-    chain_Manager.instance.spawnChain(); // Not spawned if an executor has been registered
+    ChainManager.instance.add(new AccountSharingDelegate(accounts));
+    ChainManager.instance.startChain(); // Not spawned if an executor has been registered
   }
 
-  private class BigOpportunityCalcul extends chain_Queue {
+  private class BigOpportunityCalcul extends QueueLink {
     protected List<Account> accounts;
 
     public BigOpportunityCalcul(final List<Account> accounts) {
@@ -26,7 +26,7 @@ public with sharing class AccountServiceSimple {
     }
   }
 
-  private class AccountSharingDelegate extends chain_Queue {
+  private class AccountSharingDelegate extends QueueLink {
     protected List<Account> accounts;
 
     public AccountSharingDelegate(final List<Account> accounts) {

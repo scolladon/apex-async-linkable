@@ -1,15 +1,15 @@
-public inherited sharing abstract class chain_Schedule extends chain_Chainable implements Schedulable {
+public inherited sharing abstract class ScheduleLink extends AsyncLinkable implements Schedulable {
   protected String cronExp;
   protected String jobName;
   protected SchedulableContext sc;
 
   protected override abstract void job();
 
-  public chain_Schedule() {
+  public ScheduleLink() {
     super();
   }
 
-  public chain_Schedule(final String jobName, final String cronExp) {
+  public ScheduleLink(final String jobName, final String cronExp) {
     this();
     this.jobName = jobName;
     this.cronExp = cronExp;
@@ -19,7 +19,7 @@ public inherited sharing abstract class chain_Schedule extends chain_Chainable i
     this.sc = sc;
     this.prepareChaining();
     this.job();
-    this.spawnChain();
+    this.startChain();
   }
 
   public virtual override Id spawn() {

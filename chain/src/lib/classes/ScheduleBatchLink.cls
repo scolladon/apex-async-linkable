@@ -1,18 +1,15 @@
-public inherited sharing abstract class chain_ScheduleBatch extends chain_Batch {
+public inherited sharing abstract class ScheduleBatchLink extends BatchLink {
   protected String jobName;
   protected Integer minutesFromNow;
 
   protected override abstract void job();
 
-  public chain_ScheduleBatch(
-    final String jobName,
-    final Integer minutesFromNow
-  ) {
+  public ScheduleBatchLink(final String jobName, final Integer minutesFromNow) {
     super();
     this.init(jobName, minutesFromNow);
   }
 
-  public chain_ScheduleBatch(
+  public ScheduleBatchLink(
     final String jobName,
     final Integer minutesFromNow,
     final Integer scopeSize

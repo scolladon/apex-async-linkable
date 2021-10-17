@@ -1,32 +1,32 @@
 @isTest
-public class chain_Future_TEST extends chain_Future {
-  public chain_Future_TEST() {
+public class FutureLinkTest extends FutureLink {
+  public FutureLinkTest() {
     super();
   }
 
-  public chain_Future_TEST(final boolean canBreak) {
+  public FutureLinkTest(final boolean canBreak) {
     this();
     this.canBreak = canBreak;
   }
 
   protected override void job() {
     if (this.canBreak == true) {
-      throw new chain_FutureException();
+      throw new FutureLinkException();
     }
   }
 
-  public class chain_FutureException extends Exception {
+  public class FutureLinkException extends Exception {
   }
 
   @isTest
   static void testFail() {
-    final chain_Chainable aChainable = new chain_Future_TEST(true);
+    final AsyncLinkable aAsyncLinkable = new FutureLinkTest(true);
 
     test.startTest();
     try {
-      aChainable.job();
+      aAsyncLinkable.job();
       System.Assert(false, 'should not be executed');
-    } catch (chain_FutureException ex) {
+    } catch (FutureLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
     }
     test.stopTest();
@@ -34,10 +34,10 @@ public class chain_Future_TEST extends chain_Future {
 
   @isTest
   static void testSuccess() {
-    final chain_Chainable aChainable = new chain_Future_TEST();
+    final AsyncLinkable aAsyncLinkable = new FutureLinkTest();
 
     test.startTest();
-    aChainable.spawn();
+    aAsyncLinkable.spawn();
     System.AssertNotEquals(0, Limits.getFutureCalls(), 'Should not be 0');
     test.stopTest();
   }
