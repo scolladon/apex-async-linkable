@@ -120,20 +120,22 @@ public inherited sharing class ChainManager {
 
   public static AsyncLinkable getLastLink(final AsyncLinkable aLink) {
     final LastFetcher aLastFetcher = new LastFetcher();
-    return aLastFetcher.getLast(aLink);
+    aLink?.accept(aLastFetcher);
+    return aLastFetcher.getLastLink();
   }
 
   public static AsyncLinkable[] unchain(final ChainManager chainChainManager) {
     final List<AsyncLinkable> AsyncLinkableArray = unchain(
-      chainChainManager.start
+      chainChainManager?.start
     );
-    chainChainManager.clear();
+    chainChainManager?.clear();
     return AsyncLinkableArray;
   }
 
   public static AsyncLinkable[] unchain(final AsyncLinkable aLink) {
     final Unchainer anUnchainer = new UnChainer();
-    return anUnchainer.unchain(aLink);
+    aLink?.accept(anUnchainer);
+    return anUnchainer.getLinks();
   }
 
   private class UnChainer implements AsyncLinkable.Visitor {
@@ -144,14 +146,13 @@ public inherited sharing class ChainManager {
 
     public void visit(final AsyncLinkable aLink) {
       this.links.Add(aLink);
-      if (aLink.hasNext()) {
+      if (aLink?.hasNext()) {
         this.visit(aLink.getNext());
       }
-      aLink.setNext(null);
+      aLink?.setNext(null);
     }
 
-    public List<AsyncLinkable> unchain(final AsyncLinkable aLink) {
-      this.visit(aLink);
+    public List<AsyncLinkable> getLinks() {
       return this.links;
     }
   }
@@ -162,15 +163,14 @@ public inherited sharing class ChainManager {
     }
 
     public void visit(final AsyncLinkable aLink) {
-      if (aLink != null && aLink.hasNext()) {
-        this.visit(aLink.getNext());
+      if (aLink != null && aLink?.hasNext()) {
+        this.visit(aLink?.getNext());
       } else {
         this.lastLink = aLink;
       }
     }
 
-    public AsyncLinkable getLast(final AsyncLinkable aLink) {
-      this.visit(aLink);
+    public AsyncLinkable getLastLink() {
       return this.lastLink;
     }
   }

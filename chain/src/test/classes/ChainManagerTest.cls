@@ -149,7 +149,7 @@ private class ChainManagerTest {
     System.assertEquals(
       null,
       ChainManager.getLastLink(null),
-      'getLastLink should return null with null'
+      'getLastLink should return null when called with null'
     );
   }
 
@@ -187,5 +187,11 @@ private class ChainManagerTest {
       'First element of the chain should be ' + chain
     );
     System.assertEquals(2, links.size(), 'Size of links should be 2');
+    final AsyncLinkable nullLink = null;
+    System.assertEquals(
+      new List<AsyncLinkable>(),
+      ChainManager.unchain(nullLink),
+      'unchain should return null when called with null'
+    );
   }
 }
