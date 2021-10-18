@@ -68,20 +68,17 @@ public inherited sharing class ChainManager {
     return jobId;
   }
 
-  public ChainManager add(final AsyncLinkable link) {
-    if (link == null) {
+  public ChainManager add(final AsyncLinkable aLink) {
+    if (aLink == null) {
       return this;
     }
     if (this.start == null) {
-      this.start = link;
+      this.start = aLink;
     } else {
-      this.last.setNext(link);
+      this.last.setNext(aLink);
     }
-    AsyncLinkable tmpLink = link;
-    while (tmpLink.hasNext()) {
-      tmpLink = tmpLink.getNext();
-    }
-    this.last = tmpLink;
+
+    this.last = getLastLink(aLink);
 
     return this;
   }
@@ -97,8 +94,8 @@ public inherited sharing class ChainManager {
     if (links == null) {
       return this;
     }
-    for (AsyncLinkable link : links) {
-      this.add(link);
+    for (AsyncLinkable aLink : links) {
+      this.add(aLink);
     }
     return this;
   }
@@ -121,15 +118,9 @@ public inherited sharing class ChainManager {
     return this;
   }
 
-  public static AsyncLinkable getLastLink(final AsyncLinkable link) {
-    if (link == null) {
-      return null;
-    }
-    AsyncLinkable tmpLink = link;
-    while (tmpLink.hasNext()) {
-      tmpLink = tmpLink.getNext();
-    }
-    return tmpLink;
+  public static AsyncLinkable getLastLink(final AsyncLinkable aLink) {
+    final LastFetcher aLastFetcher = new LastFetcher();
+    return aLastFetcher.getLast(aLink);
   }
 
   public static AsyncLinkable[] unchain(final ChainManager chainChainManager) {
@@ -159,9 +150,28 @@ public inherited sharing class ChainManager {
       aLink.setNext(null);
     }
 
-    List<AsyncLinkable> unchain(final AsyncLinkable aLink) {
+    public List<AsyncLinkable> unchain(final AsyncLinkable aLink) {
       this.visit(aLink);
       return this.links;
+    }
+  }
+
+  private class LastFetcher implements AsyncLinkable.Visitor {
+    private AsyncLinkable lastLink;
+    public LastFetcher() {
+    }
+
+    public void visit(final AsyncLinkable aLink) {
+      if (aLink != null && aLink.hasNext()) {
+        this.visit(aLink.getNext());
+      } else {
+        this.lastLink = aLink;
+      }
+    }
+
+    public AsyncLinkable getLast(final AsyncLinkable aLink) {
+      this.visit(aLink);
+      return this.lastLink;
     }
   }
 }
