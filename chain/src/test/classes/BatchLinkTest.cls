@@ -36,11 +36,11 @@ public class BatchLinkTest extends BatchLink {
 
   @isTest
   static void testFail() {
-    final BatchLinkTest aAsyncLinkable = new BatchLinkTest(true);
+    final BatchLinkTest anAsyncLinkable = new BatchLinkTest(true);
 
     test.startTest();
     try {
-      aAsyncLinkable.execute(null, null);
+      anAsyncLinkable.execute(null, null);
       System.Assert(false, 'should not be executed');
     } catch (BatchLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
@@ -50,20 +50,20 @@ public class BatchLinkTest extends BatchLink {
 
   @isTest
   static void testSuccess() {
-    final AsyncLinkable aAsyncLinkable = new BatchLinkTest();
+    final AsyncLinkable anAsyncLinkable = new BatchLinkTest();
 
     test.startTest();
-    final Id jobId = aAsyncLinkable.spawn();
+    final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 
   @isTest
   static void testSuccessScope() {
-    final AsyncLinkable aAsyncLinkable = new BatchLinkTest(-1);
+    final AsyncLinkable anAsyncLinkable = new BatchLinkTest(-1);
 
     test.startTest();
-    final Id jobId = aAsyncLinkable.spawn();
+    final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }

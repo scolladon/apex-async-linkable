@@ -32,20 +32,20 @@ private class AsyncLinkableTest {
 
   @isTest
   static void testQueueLink() {
-    final AsyncLinkable aAsyncLinkable = new QueueLinkTest();
+    final AsyncLinkable anAsyncLinkable = new QueueLinkTest();
 
     test.startTest();
-    final Id jobId = aAsyncLinkable.spawn();
+    final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }
 
   @isTest
   static void testScheduleBatchLink() {
-    final AsyncLinkable aAsyncLinkable = new ScheduleBatchLinkTest('test', 1);
+    final AsyncLinkable anAsyncLinkable = new ScheduleBatchLinkTest('test', 1);
 
     test.startTest();
-    final Id jobId = aAsyncLinkable.spawn();
+    final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }

@@ -20,11 +20,11 @@ public class FutureLinkTest extends FutureLink {
 
   @isTest
   static void testFail() {
-    final AsyncLinkable aAsyncLinkable = new FutureLinkTest(true);
+    final AsyncLinkable anAsyncLinkable = new FutureLinkTest(true);
 
     test.startTest();
     try {
-      aAsyncLinkable.job();
+      anAsyncLinkable.job();
       System.Assert(false, 'should not be executed');
     } catch (FutureLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
@@ -34,10 +34,10 @@ public class FutureLinkTest extends FutureLink {
 
   @isTest
   static void testSuccess() {
-    final AsyncLinkable aAsyncLinkable = new FutureLinkTest();
+    final AsyncLinkable anAsyncLinkable = new FutureLinkTest();
 
     test.startTest();
-    aAsyncLinkable.spawn();
+    anAsyncLinkable.spawn();
     System.AssertNotEquals(0, Limits.getFutureCalls(), 'Should not be 0');
     test.stopTest();
   }

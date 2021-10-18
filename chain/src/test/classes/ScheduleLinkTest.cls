@@ -24,7 +24,7 @@ public class ScheduleLinkTest extends ScheduleLink {
 
   @isTest
   static void testFail() {
-    final ScheduleLinkTest aAsyncLinkable = new ScheduleLinkTest(
+    final ScheduleLinkTest anAsyncLinkable = new ScheduleLinkTest(
       'test',
       '0 0 * * * ?',
       true
@@ -32,7 +32,7 @@ public class ScheduleLinkTest extends ScheduleLink {
 
     test.startTest();
     try {
-      aAsyncLinkable.execute(null);
+      anAsyncLinkable.execute(null);
       System.Assert(false, 'should not be executed');
     } catch (ScheduleLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
@@ -42,13 +42,13 @@ public class ScheduleLinkTest extends ScheduleLink {
 
   @isTest
   static void testSuccess() {
-    final AsyncLinkable aAsyncLinkable = new ScheduleLinkTest(
+    final AsyncLinkable anAsyncLinkable = new ScheduleLinkTest(
       'test',
       '0 0 * * * ?'
     );
 
     test.startTest();
-    final Id jobId = aAsyncLinkable.spawn();
+    final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }

@@ -40,7 +40,7 @@ public class ScheduleBatchLinkTest extends ScheduleBatchLink {
 
   @isTest
   static void testFail() {
-    final ScheduleBatchLinkTest aAsyncLinkable = new ScheduleBatchLinkTest(
+    final ScheduleBatchLinkTest anAsyncLinkable = new ScheduleBatchLinkTest(
       'test',
       1,
       1,
@@ -49,7 +49,7 @@ public class ScheduleBatchLinkTest extends ScheduleBatchLink {
 
     test.startTest();
     try {
-      aAsyncLinkable.execute(null, null);
+      anAsyncLinkable.execute(null, null);
       System.Assert(false, 'should not be executed');
     } catch (ScheduleBatchLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
@@ -59,10 +59,10 @@ public class ScheduleBatchLinkTest extends ScheduleBatchLink {
 
   @isTest
   static void testSuccess() {
-    final AsyncLinkable aAsyncLinkable = new ScheduleBatchLinkTest('test', 1);
+    final AsyncLinkable anAsyncLinkable = new ScheduleBatchLinkTest('test', 1);
 
     test.startTest();
-    final Id jobId = aAsyncLinkable.spawn();
+    final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }

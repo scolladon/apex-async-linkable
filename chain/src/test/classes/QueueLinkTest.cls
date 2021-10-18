@@ -20,11 +20,11 @@ public class QueueLinkTest extends QueueLink {
 
   @isTest
   static void testFail() {
-    final QueueLinkTest aAsyncLinkable = new QueueLinkTest(true);
+    final QueueLinkTest anAsyncLinkable = new QueueLinkTest(true);
 
     test.startTest();
     try {
-      aAsyncLinkable.execute(null);
+      anAsyncLinkable.execute(null);
       System.Assert(false, 'should not be executed');
     } catch (QueueLinkException ex) {
       System.AssertNotEquals(null, ex, 'Exception should be thrown');
@@ -34,10 +34,10 @@ public class QueueLinkTest extends QueueLink {
 
   @isTest
   static void testSuccess() {
-    final AsyncLinkable aAsyncLinkable = new QueueLinkTest();
+    final AsyncLinkable anAsyncLinkable = new QueueLinkTest();
 
     test.startTest();
-    final Id jobId = aAsyncLinkable.spawn();
+    final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
     System.AssertNotEquals(null, jobId, 'Should be filled');
   }
