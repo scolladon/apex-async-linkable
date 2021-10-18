@@ -1,12 +1,11 @@
 // It works like a LinkedList
 public inherited sharing class ChainManager {
-  private static ChainManager privateInstance;
   public static final ChainManager instance {
     get {
-      if (privateInstance == null) {
-        privateInstance = new ChainManager();
+      if (instance == null) {
+        instance = new ChainManager();
       }
-      return privateInstance;
+      return instance;
     }
     private set;
   }
