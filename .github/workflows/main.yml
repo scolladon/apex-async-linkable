@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  formatting-and-linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout source code"
+        uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: "Install npm dependencies"
+        run: npm install
+
+      - name: "Code formatting verification with Prettier"
+        run: npm run prettier:verify
+
+      - name: Install PMD
+        run: wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F6.22.0/pmd-bin-6.22.0.zip && unzip pmd-bin-6.22.0.zip
+
+      - name: Execute PMD
+        run: pmd-bin-6.22.0/bin/run.sh pmd -minimumpriority 2 -d chain -R apex-ruleset.xml -f text -l apex
+
+  ci-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Salesforce CLI
+        run: |
+          wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+          mkdir sfdx-cli
+          tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+          ./sfdx-cli/install
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Populate auth file with CI_URL secret"
+        shell: bash
+        run: "echo ${{ secrets.CI_URL}} > ./CI_URL.txt"
+
+      - name: "Authenticate CI Sandbox"
+        run: "sfdx force:auth:sfdxurl:store -f ./CI_URL.txt -a ci -d"
+
+      - name: 'Create scratch org'
+        run: 'sfdx force:org:create -f config/project-scratch-def.json -a scratch-org -s -d 1'
+
+      - name: 'Push source to scratch org'
+        run: 'sfdx force:source:push'
+
+      - name: 'Run Apex tests'
+        run: npm run test:coverage
+
+      - name: 'Delete scratch org'
+        if: always()
+        run: 'sfdx force:org:delete -p -u scratch-org'

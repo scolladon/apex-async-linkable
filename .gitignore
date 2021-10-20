@@ -1,2 +1,4 @@
 .vscode
 .sfdx
+tests
+node_modules/
