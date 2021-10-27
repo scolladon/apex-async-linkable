@@ -3,6 +3,10 @@
     {
       "path": "chain",
       "default": true
+    },
+    {
+      "path": "samples",
+      "default": false
     }
   ],
   "namespace": "",
