@@ -27,25 +27,17 @@
     "lint": "pmd pmd -minimumpriority 2 -d chain -R apex-ruleset.xml -f text -l apex",
     "test": "sfdx force:apex:test:run -r tap -d ./tests/apex -s chainLibrary -w 20",
     "test:coverage": "sfdx force:apex:test:run -r tap -d ./tests/apex -s chainLibrary -w 20 -c",
+    "pre-commit": "lint-staged && npm run lint",
+    "pre-push": "npm run test:coverage",
     "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
-    "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\""
+    "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "prepare": "husky install"
   },
   "devDependencies": {
-    "@prettier/plugin-xml": "^1.1.0",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.1.2",
-    "prettier": "^2.4.1",
-    "prettier-plugin-apex": "^1.10.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run lint",
-      "pre-push": "npm run test:coverage"
-    }
-  },
-  "lint-staged": {
-    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,yaml,yml}": [
-      "prettier --write"
-    ]
+    "@prettier/plugin-xml": "~1.1.0",
+    "husky": "^7.0.0",
+    "lint-staged": "~11.2.6",
+    "prettier": "~2.4.1",
+    "prettier-plugin-apex": "~1.10.0"
   }
 }
