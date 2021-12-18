@@ -1,12 +1,40 @@
-name: main
+name: CI
 
 on:
-  push:
+  pull_request:
     branches: [master]
 
 jobs:
+  formatting-and-linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout source code"
+        uses: actions/checkout@v2
 
-  build:
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      
+      - name: Install Salesforce CLI
+        run: |
+          wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+          mkdir sfdx-cli
+          tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+          ./sfdx-cli/install
+
+      - name: "Install npm dependencies"
+        run: npm install
+
+      - name: "Code formatting verification with Prettier"
+        run: npm run prettier:verify
+
+      - name: Execute Static Analysis
+        run: npm run lint
+
+  ci-build:
     runs-on: ubuntu-latest
     steps:
       - name: Install Salesforce CLI
@@ -33,7 +61,7 @@ jobs:
         run: 'sfdx force:source:push'
 
       - name: 'Run Apex tests'
-        run: sfdx force:apex:test:run -c -r human -d ./tests/apex -w 20
+        run: npm run test:coverage
         
       - name: 'Delete coverage file (temporary step)'
         run: rm ./tests/apex/test-result-707*-codecoverage.json
