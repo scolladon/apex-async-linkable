@@ -63,9 +63,6 @@ jobs:
       - name: 'Run Apex tests'
         run: npm run test:coverage
         
-      - name: 'Delete coverage file (temporary step)'
-        run: rm ./tests/apex/test-result-707*-codecoverage.json
-        
       - name: 'Upload code coverage for Apex to Codecov.io'
         uses: codecov/codecov-action@v2.0.2
         with:
