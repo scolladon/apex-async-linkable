@@ -145,8 +145,12 @@ public inherited sharing class ChainManager {
 
     public void visit(final AsyncLinkable aLink) {
       this.links.Add(aLink);
-      if (aLink?.hasNext()) {
-        this.visit(aLink.getNext());
+      final Iterator<AsyncLinkable> iterator = new AsyncLinkable.AsyncLinkIterable(
+          aLink
+        )
+        .iterator();
+      if (iterator.hasNext()) {
+        this.visit(iterator.next());
       }
       aLink?.setNext(null);
     }
@@ -162,11 +166,16 @@ public inherited sharing class ChainManager {
     }
 
     public void visit(final AsyncLinkable aLink) {
-      if (aLink != null && aLink?.hasNext()) {
-        this.visit(aLink?.getNext());
-      } else {
-        this.lastLink = aLink;
+      AsyncLinkable link = aLink;
+      final Iterator<AsyncLinkable> iterator = new AsyncLinkable.AsyncLinkIterable(
+          aLink
+        )
+        .iterator();
+      while (iterator.hasNext()) {
+        link = iterator.next();
       }
+
+      this.lastLink = link;
     }
 
     public AsyncLinkable getLastLink() {

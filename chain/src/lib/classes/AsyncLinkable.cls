@@ -27,19 +27,39 @@ public inherited sharing abstract class AsyncLinkable {
     this.nextLink = link;
   }
 
-  public virtual AsyncLinkable getNext() {
-    return this.nextLink;
-  }
-
-  public virtual Boolean hasNext() {
-    return this.getNext() != null;
-  }
-
   public virtual void accept(Visitor aVisitor) {
     aVisitor.visit(this);
   }
 
   public interface Visitor {
     void visit(final AsyncLinkable aLink);
+  }
+
+  public inherited sharing class AsyncLinkIterable implements Iterable<AsyncLinkable> {
+    public AsyncLinkable link { get; set; }
+    public AsyncLinkIterable(final AsyncLinkable link) {
+      this.link = link;
+    }
+
+    public Iterator<AsyncLinkable> iterator() {
+      return new AsyncLinkIterator(this);
+    }
+  }
+
+  public inherited sharing class AsyncLinkIterator implements Iterator<AsyncLinkable> {
+    private AsyncLinkIterable linkIterable;
+
+    private AsyncLinkIterator(AsyncLinkIterable linkIterable) {
+      this.linkIterable = linkIterable;
+    }
+
+    public Boolean hasNext() {
+      return this.linkIterable.link?.nextLink != null;
+    }
+
+    public AsyncLinkable next() {
+      this.linkIterable.link = this.linkIterable?.link?.nextLink;
+      return this.linkIterable?.link;
+    }
   }
 }
