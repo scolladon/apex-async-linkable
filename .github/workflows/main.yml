@@ -9,6 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Set environment variables
+        run: |
+            echo "SFDX_DISABLE_AUTOUPDATE=true" >> $GITHUB_ENV
+            echo "SFDX_DISABLE_SOURCE_MEMBER_POLLING=true" >> $GITHUB_ENV
+            echo "SFDX_DISABLE_TELEMETRY=true" >> $GITHUB_ENV
+            
       - name: Install Salesforce CLI
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
