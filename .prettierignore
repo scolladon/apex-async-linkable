@@ -5,3 +5,4 @@ coverage/
 tests/
 sfdx-project.json
 config/project-scratch-def.json
+sfdx-cli

@@ -1,5 +1,5 @@
 public inherited sharing abstract class AsyncLinkable {
-  protected AsyncLinkable nextLink;
+  public AsyncLinkable nextLink { get; private set; }
   protected boolean canBreak;
   protected String internalExecutor;
 
@@ -25,14 +25,6 @@ public inherited sharing abstract class AsyncLinkable {
 
   public virtual void setNext(final AsyncLinkable link) {
     this.nextLink = link;
-  }
-
-  public virtual AsyncLinkable getNext() {
-    return this.nextLink;
-  }
-
-  public virtual Boolean hasNext() {
-    return this.getNext() != null;
   }
 
   public virtual void accept(Visitor aVisitor) {

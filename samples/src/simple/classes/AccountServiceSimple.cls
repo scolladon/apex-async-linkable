@@ -2,7 +2,7 @@ public with sharing class AccountServiceSimple {
   public static void handleUpdate(final List<Account> accounts) {
     // Handle business logic
     // Share information to external system
-    ChainManager.instance.add(new BigOpportunityCalcul(accounts));
+    ChainManager.instance.add(new BigOpportunityProcessing(accounts));
     ChainManager.instance.startChain(); // Not spawned if an executor has been registered
   }
 
@@ -13,10 +13,10 @@ public with sharing class AccountServiceSimple {
     ChainManager.instance.startChain(); // Not spawned if an executor has been registered
   }
 
-  private class BigOpportunityCalcul extends QueueLink {
+  private class BigOpportunityProcessing extends QueueLink {
     protected List<Account> accounts;
 
-    public BigOpportunityCalcul(final List<Account> accounts) {
+    public BigOpportunityProcessing(final List<Account> accounts) {
       this.accounts = accounts;
     }
 

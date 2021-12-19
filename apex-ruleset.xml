@@ -2,7 +2,7 @@
 <ruleset
   xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  name="Custom Apex Rules"
+  name="Async-Linkable"
   xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
 >
     <description>Custom Ruleset to use with Apex PMD</description>

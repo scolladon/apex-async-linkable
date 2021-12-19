@@ -14,8 +14,14 @@ public inherited sharing abstract class FutureLink extends AsyncLinkable {
 
   public virtual override Id spawn() {
     FutureLink.execute(String.valueOf(this).split(':')[0]);
-    return null; // TODO implement query to get information
-    // SELECT Id  FROM AsyncApexJob where MethodName='method_name' And ApexClassId='apex_Id' order by createddate desc
+    return [
+      SELECT Id
+      FROM AsyncApexJob
+      WHERE MethodName = 'execute' AND ApexClass.Name = 'FutureLink'
+      ORDER BY CreatedDate DESC
+      LIMIT 1
+    ]
+    ?.Id;
   }
 
   public void doExecute() {
