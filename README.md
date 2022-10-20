@@ -1,6 +1,6 @@
 ## Apex AsyncLinkable ![Build](https://github.com/scolladon/apex-async-linkable/actions/workflows/main.yml/badge.svg) [![codecov](https://codecov.io/gh/scolladon/apex-async-linkable/branch/master/graph/badge.svg?token=DFHDV3OCIS)](https://codecov.io/gh/scolladon/apex-async-linkable)
 
-This library provides all the classes required to chain all kind of Async jobs.
+This library provides all the classes required to chain all kind of async jobs in Apex.
 
 ## Installation
 
@@ -15,11 +15,11 @@ $ sfdx force:source:deploy -p chain/src/lib
 2. Respect the interface contract and override the `job` method.
    _`start` method must also be overridden for the BatchLink and ScheduleBatchLink class_
 
-The `job` method will contains your business logic. It can access the private attributes of your class (and the protected ones of the base class).
+The `job` method will contain your business logic. It can then access the private attributes of your class and the protected ones of the base class.
 
-If you need some extra interface to make you're code work, it is up to you to add them (`Database.Stateful`, `Database.AllowsCallouts`, etc).
+If you need some extra interface to make your code work, it is up to you to add them (such as `Database.Stateful`, `Database.AllowsCallouts`, etc).
 
-You're ready to chain apex asynchronous process!
+You're ready to chain apex asynchronous processes!
 
 Example for Batchable:
 
@@ -42,7 +42,7 @@ public class BatchLink_EXAMPLE extends BatchLink {
 }
 ```
 
-Example for Queue:
+Example for Queueable:
 
 ```apex
 //Subclass QueueLink for example
@@ -57,7 +57,7 @@ public class QueueLink_EXAMPLE extends QueueLink {
 }
 ```
 
-Example chaining `BatchLink_EXAMPLE` and `QueueLink_EXAMPLE`;
+Example chaining of a batch and queeuable instances:
 
 ```apex
 // Chain both and execute them
@@ -73,7 +73,7 @@ public class Service {
 
 ## Improvement
 
-Implement sub class allowing to handle BatchLink and ScheduleBatchLink with iterable in addition of QueryLocator\
+Implement sub class allowing to handle BatchLink and ScheduleBatchLink with iterable in addition of QueryLocator.
 
 ## Versioning
 
