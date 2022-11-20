@@ -64,6 +64,26 @@ private class ChainManagerTest {
   }
 
   @isTest
+  static void testAddFirstLink() {
+    final ChainManager chainChainManager = new ChainManager(EXECUTOR);
+    final AsyncLinkable chainBatchLink = new BatchLinkTest();
+    chainBatchLink.setNext(new FutureLinkTest());
+    AsyncLinkable firstLinkable = new FutureLinkTest();
+
+    test.startTest();
+    chainChainManager.add(chainBatchLink)
+      .addFirst(null)
+      .addFirst(firstLinkable);
+    test.stopTest();
+
+    System.assertEquals(
+      firstLinkable,
+      ChainManager.unchain(chainChainManager)[0],
+      'First element of the chain should be ' + firstLinkable
+    );
+  }
+
+  @isTest
   static void testAddChainManager() {
     final ChainManager chainChainManager = new ChainManager(EXECUTOR);
     final ChainManager chainChainManager2 = new ChainManager();
