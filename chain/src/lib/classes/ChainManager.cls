@@ -1,4 +1,3 @@
-// It works like a LinkedList
 public inherited sharing class ChainManager {
   public static final ChainManager instance {
     get {
@@ -106,6 +105,18 @@ public inherited sharing class ChainManager {
     for (ChainManager chainChainManager : chainChainManagers) {
       this.add(chainChainManager);
     }
+
+    return this;
+  }
+
+  public ChainManager addFirst(final AsyncLinkable aLink) {
+    if (aLink == null) {
+      return this;
+    }
+    final AsyncLinkable lastOfFirst = getLastLink(aLink);
+    final AsyncLinkable oldFirst = this.start;
+    this.start = aLink;
+    lastOfFirst.setNext(oldFirst);
 
     return this;
   }
