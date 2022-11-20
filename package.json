@@ -36,10 +36,10 @@
     "test:coverage": "npm run test -- -c"
   },
   "devDependencies": {
-    "@prettier/plugin-xml": "~1.1.0",
-    "husky": "^7.0.0",
-    "lint-staged": "^12.1.3",
-    "prettier": "~2.5.1",
-    "prettier-plugin-apex": "~1.10.0"
+    "@prettier/plugin-xml": "~2.2.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
+    "prettier": "~2.7.1",
+    "prettier-plugin-apex": "~1.11.0"
   }
 }
