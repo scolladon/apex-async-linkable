@@ -41,7 +41,7 @@ private class ChainManagerTest {
     Id jobId1 = aChainChainManager.startChain(EXECUTOR);
     test.stopTest();
 
-    System.assertNotEquals(null, jobId1, 'Job should be spawn: ' + jobId1);
+    Assert.isNotNull(jobId1, 'Job should be spawn: ' + jobId1);
   }
 
   @isTest
@@ -56,7 +56,7 @@ private class ChainManagerTest {
     chainChainManager.add(chainBatchLink);
     test.stopTest();
 
-    System.assertEquals(
+    Assert.areEqual(
       chainBatchLink,
       ChainManager.unchain(chainChainManager)[0],
       'First element of the chain should be ' + chainBatchLink
@@ -76,7 +76,7 @@ private class ChainManagerTest {
       .addFirst(firstLinkable);
     test.stopTest();
 
-    System.assertEquals(
+    Assert.areEqual(
       firstLinkable,
       ChainManager.unchain(chainChainManager)[0],
       'First element of the chain should be ' + firstLinkable
@@ -97,7 +97,7 @@ private class ChainManagerTest {
     chainChainManager.add(chainChainManager2);
     test.stopTest();
 
-    System.assertEquals(
+    Assert.areEqual(
       chainBatchLink,
       ChainManager.unchain(chainChainManager)[0],
       'First element of the chain should be ' + chainBatchLink
@@ -119,7 +119,7 @@ private class ChainManagerTest {
     chainChainManager.add(chains);
     test.stopTest();
 
-    System.assertEquals(
+    Assert.areEqual(
       chainBatchLink,
       ChainManager.unchain(chainChainManager)[0],
       'First element of the chain should be ' + chainBatchLink
@@ -144,7 +144,7 @@ private class ChainManagerTest {
     chainChainManager.add(chains);
     test.stopTest();
 
-    System.assertEquals(
+    Assert.areEqual(
       chainBatchLink,
       ChainManager.unchain(chainChainManager)[0],
       'First element of the chain should be ' + chainBatchLink
@@ -161,13 +161,12 @@ private class ChainManagerTest {
     final AsyncLinkable lastLink = ChainManager.getLastLink(chainFutureLink);
     test.stopTest();
 
-    System.assertEquals(
+    Assert.areEqual(
       chainBatchLink,
       lastLink,
       'Last element of the chain should be ' + chainBatchLink
     );
-    System.assertEquals(
-      null,
+    Assert.isNull(
       ChainManager.getLastLink(null),
       'getLastLink should return null when called with null'
     );
@@ -184,12 +183,12 @@ private class ChainManagerTest {
     final AsyncLinkable[] links = ChainManager.unchain(chainChainManager);
     test.stopTest();
 
-    System.assertEquals(
+    Assert.areEqual(
       chain,
       links[0],
       'First element of the chain should be ' + chain
     );
-    System.assertEquals(2, links.size(), 'Size of links should be 2');
+    Assert.areEqual(2, links.size(), 'Size of links should be 2');
   }
 
   @isTest
@@ -201,14 +200,14 @@ private class ChainManagerTest {
     final AsyncLinkable[] links = ChainManager.unchain(chain);
     test.stopTest();
 
-    System.assertEquals(
+    Assert.areEqual(
       chain,
       links[0],
       'First element of the chain should be ' + chain
     );
-    System.assertEquals(2, links.size(), 'Size of links should be 2');
+    Assert.areEqual(2, links.size(), 'Size of links should be 2');
     final AsyncLinkable nullLink = null;
-    System.assertEquals(
+    Assert.areEqual(
       new List<AsyncLinkable>(),
       ChainManager.unchain(nullLink),
       'unchain should return null when called with null'

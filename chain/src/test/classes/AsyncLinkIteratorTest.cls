@@ -6,8 +6,8 @@ private class AsyncLinkIteratorTest {
     final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(null);
 
     // Assert
-    System.assertEquals(false, sut.hasNext());
-    System.assertEquals(false, sut.hasNext());
+    Assert.isFalse(sut.hasNext());
+    Assert.isFalse(sut.hasNext());
   }
 
   @IsTest
@@ -17,11 +17,11 @@ private class AsyncLinkIteratorTest {
     final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(link);
 
     // Assert
-    System.assertEquals(true, sut.hasNext());
-    System.assertEquals(true, sut.hasNext());
+    Assert.isTrue(sut.hasNext());
+    Assert.isTrue(sut.hasNext());
     sut.next();
-    System.assertEquals(false, sut.hasNext());
-    System.assertEquals(false, sut.hasNext());
+    Assert.isFalse(sut.hasNext());
+    Assert.isFalse(sut.hasNext());
   }
 
   @IsTest
@@ -32,14 +32,14 @@ private class AsyncLinkIteratorTest {
     final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(link);
 
     // Assert
-    System.assertEquals(true, sut.hasNext());
-    System.assertEquals(true, sut.hasNext());
+    Assert.isTrue(sut.hasNext());
+    Assert.isTrue(sut.hasNext());
     sut.next();
-    System.assertEquals(true, sut.hasNext());
-    System.assertEquals(true, sut.hasNext());
+    Assert.isTrue(sut.hasNext());
+    Assert.isTrue(sut.hasNext());
     sut.next();
-    System.assertEquals(false, sut.hasNext());
-    System.assertEquals(false, sut.hasNext());
+    Assert.isFalse(sut.hasNext());
+    Assert.isFalse(sut.hasNext());
   }
 
   @IsTest
@@ -48,8 +48,8 @@ private class AsyncLinkIteratorTest {
     final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(null);
 
     // Assert
-    System.assertEquals(null, sut.next());
-    System.assertEquals(null, sut.next());
+    Assert.isNull(sut.next());
+    Assert.isNull(sut.next());
   }
 
   @IsTest
@@ -59,8 +59,8 @@ private class AsyncLinkIteratorTest {
     final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(link);
 
     // Assert
-    System.assertEquals(link, sut.next());
-    System.assertEquals(null, sut.next());
+    Assert.areEqual(link, sut.next());
+    Assert.isNull(sut.next());
   }
 
   @IsTest
@@ -72,16 +72,15 @@ private class AsyncLinkIteratorTest {
     final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(link1);
 
     // Assert
-    System.assertEquals(link1, sut.next());
-    System.assertEquals(link2, sut.next());
-    System.assertEquals(false, sut.hasNext());
-    System.assertEquals(null, sut.next());
-    System.assertEquals(false, sut.hasNext());
+    Assert.areEqual(link1, sut.next());
+    Assert.areEqual(link2, sut.next());
+    Assert.isFalse(sut.hasNext());
+    Assert.isNull(sut.next());
+    Assert.isFalse(sut.hasNext());
   }
 
   private class TestLink extends QueueLink {
     protected override void job() {
-      System.Assert(true);
     }
   }
 }
