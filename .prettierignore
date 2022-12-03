@@ -1,5 +1,6 @@
-.sfdx
 .github
+.sf
+.sfdx
 .vscode
 coverage/
 tests/
