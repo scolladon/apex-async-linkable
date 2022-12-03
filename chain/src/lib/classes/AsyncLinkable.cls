@@ -1,13 +1,11 @@
 public inherited sharing abstract class AsyncLinkable {
   public AsyncLinkable nextLink { get; private set; }
-  protected boolean canBreak;
   protected String internalExecutor;
 
   public abstract Id spawn();
   protected abstract void job();
 
   public AsyncLinkable() {
-    this.canBreak = false;
     this.internalExecutor = EncodingUtil.convertToHex(
         Crypto.generateAesKey(128)
       )

@@ -1,5 +1,6 @@
 @isTest
 public class QueueLinkTest extends QueueLink {
+  private Boolean canBreak;
   public QueueLinkTest() {
     super();
   }

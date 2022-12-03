@@ -1,5 +1,6 @@
 @isTest
 public class ScheduleBatchLinkTest extends ScheduleBatchLink {
+  private Boolean canBreak;
   public ScheduleBatchLinkTest(
     final String jobName,
     final Integer minutesFromNow

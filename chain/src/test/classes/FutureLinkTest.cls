@@ -1,5 +1,6 @@
 @isTest
 public class FutureLinkTest extends FutureLink {
+  private Boolean canBreak;
   public FutureLinkTest() {
     super();
   }

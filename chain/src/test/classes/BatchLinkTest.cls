@@ -1,5 +1,7 @@
 @isTest
 public class BatchLinkTest extends BatchLink {
+  private Boolean canBreak;
+
   public override Database.QueryLocator start(Database.BatchableContext bc) {
     return Database.getQueryLocator('select id from account limit 1');
   }

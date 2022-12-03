@@ -1,5 +1,6 @@
 @isTest
 public class ScheduleLinkTest extends ScheduleLink {
+  private Boolean canBreak;
   public ScheduleLinkTest(
     final String jobName,
     final String cronExp,
