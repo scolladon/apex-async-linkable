@@ -148,7 +148,7 @@ public inherited sharing class ChainManager {
     return unlinker.getLinks();
   }
 
-  private class UnLinker implements AsyncLinkable.Visitor {
+  private class UnLinker implements AsyncLinkable.LinkVisitor {
     private AsyncLinkable link;
 
     public void visit(final AsyncLinkable link) {
@@ -175,7 +175,7 @@ public inherited sharing class ChainManager {
     }
   }
 
-  private class LastFetcher implements AsyncLinkable.Visitor {
+  private class LastFetcher implements AsyncLinkable.LinkVisitor {
     private AsyncLinkable link;
 
     public void visit(final AsyncLinkable link) {

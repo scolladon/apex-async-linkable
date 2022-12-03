@@ -27,11 +27,11 @@ public inherited sharing abstract class AsyncLinkable {
     this.nextLink = link;
   }
 
-  public virtual void accept(Visitor aVisitor) {
+  public virtual void accept(LinkVisitor aVisitor) {
     aVisitor.visit(this);
   }
 
-  public interface Visitor {
+  public interface LinkVisitor {
     void visit(final AsyncLinkable aLink);
   }
 }
