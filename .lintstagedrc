@@ -1,8 +1,5 @@
 {
-    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,yaml,yml}": [
-      "prettier --write"
-    ],
-    "**/classes/*.cls": [
-      "sfdx scanner:run -v -f table -c 'Async-Linkable' -t "
-    ]
+  "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,yaml,yml}": [
+    "prettier --write"
+  ]
 }
