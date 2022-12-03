@@ -15,8 +15,8 @@ public inherited sharing abstract class AsyncLinkable {
   }
 
   protected virtual void prepareChaining() {
-    ChainManager.instance.registerExecutor(this.internalExecutor);
-    ChainManager.instance.add(this.nextLink);
+    ChainManager.instance.registerExecutor(this.internalExecutor)
+      .add(this.nextLink);
   }
 
   protected void startChain() {

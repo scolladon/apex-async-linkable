@@ -1,9 +1,9 @@
 @iStest
-private class AsyncLinkIterableTest {
+private class AsyncLinkIteratorTest {
   @IsTest
   static void hasNext_givenNull_returnFalse() {
     // Arrange
-    final Iterator<AsyncLinkable> sut = new AsyncLinkIterable(null).iterator();
+    final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(null);
 
     // Assert
     System.assertEquals(false, sut.hasNext());
@@ -14,7 +14,7 @@ private class AsyncLinkIterableTest {
   static void hasNext_given1Link_returnTrueThenFalse() {
     // Arrange
     final AsyncLinkable link = new TestLink();
-    final Iterator<AsyncLinkable> sut = new AsyncLinkIterable(link).iterator();
+    final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(link);
 
     // Assert
     System.assertEquals(true, sut.hasNext());
@@ -29,7 +29,7 @@ private class AsyncLinkIterableTest {
     // Arrange
     final AsyncLinkable link = new TestLink();
     link.setNext(new TestLink());
-    final Iterator<AsyncLinkable> sut = new AsyncLinkIterable(link).iterator();
+    final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(link);
 
     // Assert
     System.assertEquals(true, sut.hasNext());
@@ -45,7 +45,7 @@ private class AsyncLinkIterableTest {
   @IsTest
   static void next_givenNull_returnNullThenReturnNull() {
     // Arrange
-    final Iterator<AsyncLinkable> sut = new AsyncLinkIterable(null).iterator();
+    final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(null);
 
     // Assert
     System.assertEquals(null, sut.next());
@@ -56,7 +56,7 @@ private class AsyncLinkIterableTest {
   static void next_given1Link_returnLinkThenReturnNull() {
     // Arrange
     final AsyncLinkable link = new TestLink();
-    final Iterator<AsyncLinkable> sut = new AsyncLinkIterable(link).iterator();
+    final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(link);
 
     // Assert
     System.assertEquals(link, sut.next());
@@ -69,7 +69,7 @@ private class AsyncLinkIterableTest {
     final AsyncLinkable link1 = new TestLink();
     final AsyncLinkable link2 = new TestLink();
     link1.setNext(link2);
-    final Iterator<AsyncLinkable> sut = new AsyncLinkIterable(link1).iterator();
+    final Iterator<AsyncLinkable> sut = new AsyncLinkIterator(link1);
 
     // Assert
     System.assertEquals(link1, sut.next());

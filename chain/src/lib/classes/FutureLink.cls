@@ -24,7 +24,7 @@ public inherited sharing abstract class FutureLink extends AsyncLinkable {
     ?.Id;
   }
 
-  public void doExecute() {
+  protected void doExecute() {
     this.prepareChaining();
     this.job();
     this.startChain();
