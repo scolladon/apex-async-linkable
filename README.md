@@ -46,6 +46,9 @@ $ sfdx force:source:deploy -p chain/src/lib
 
 ## Usage
 
+AsyncLinkable implementation is a linked list of special convenient async type
+holding chaining and spawning properties abstracted to the developer.
+
 ### How to use the `ChainManager`
 
 Use the global `ChainManager.instance` to
@@ -267,6 +270,65 @@ Using an executor allow us to easily write the code without having to care much 
 This makes the code safer to run in async process.
 
 Per example updating a list of account inside a Queue will be possible with this trigger without having to check if it is run inside a queueable job or not to spawn the async processes running business logic.
+
+### Iterate over a chain
+
+Use the `AsyncLinkIterator` as a convenient way to iterate over an `AsyncLink`:
+
+```apex
+final AsyncLinkable queueLink = new MyQueueLink();
+final AsyncLinkable anotherQueueLink = new MyOtherQueueLink();
+final AsyncLinkable yetAnotherQueueLink = new MyYetOtherQueueLink();
+queueLink.setNext(anotherQueueLink);
+anotherQueueLink.setNext(yetAnotherQueueLink);
+final Iterator<AsyncLinkable> iterator = new AsyncLinkIterator(queueLink);
+AsyncLinkable currentLink;
+while (iterator.hasNext()) {
+  currentLink = iterator.next();
+  // Do stuff
+}
+```
+
+### Implement the Visitor pattern
+
+Use the `LinkVisitor` interface to create an AsyncLinkableVisitor and implement custom logic to the whole linked list.
+`ChainManager.unchain` and `ChainManager.getLastLink` implementation is done using this pattern.
+
+Here is an example to extract from the chain every element of a certain type:
+
+```apex
+private class ExtractElement implements AsyncLinkable.LinkVisitor {
+  private AsyncLinkable link;
+  private System.Type typeToExtract;
+
+  public ExtractElement(final System.Type typeToExtract) {
+    this.typeToExtract = typeToExtract;
+  }
+
+  public void visit(final AsyncLinkable link) {
+    this.link = link;
+  }
+
+  public List<AsyncLinkable> getLinks() {
+    final List<AsyncLinkable> links = new List<AsyncLinkable>();
+    if (this.link == null) {
+      return links;
+    }
+    final Iterator<AsyncLinkable> iterator = new AsyncLinkIterator(this.link);
+    AsyncLinkable currentLink;
+    while (iterator.hasNext()) {
+      currentLink = iterator.next();
+      if (
+        String.valueOf(currentLink).split(':')[0] ==
+        this.typeToExtract.getName()
+      ) {
+        links.Add(currentLink);
+      }
+    }
+    return links;
+  }
+}
+```
 
 ## Software Architecture
 
