@@ -1,13 +1,11 @@
 public inherited sharing abstract class AsyncLinkable {
   public AsyncLinkable nextLink { get; private set; }
-  protected boolean canBreak;
   protected String internalExecutor;
 
   public abstract Id spawn();
   protected abstract void job();
 
   public AsyncLinkable() {
-    this.canBreak = false;
     this.internalExecutor = EncodingUtil.convertToHex(
         Crypto.generateAesKey(128)
       )
@@ -15,8 +13,8 @@ public inherited sharing abstract class AsyncLinkable {
   }
 
   protected virtual void prepareChaining() {
-    ChainManager.instance.registerExecutor(this.internalExecutor);
-    ChainManager.instance.add(this.nextLink);
+    ChainManager.instance.registerExecutor(this.internalExecutor)
+      .add(this.nextLink);
   }
 
   protected void startChain() {
@@ -27,11 +25,11 @@ public inherited sharing abstract class AsyncLinkable {
     this.nextLink = link;
   }
 
-  public virtual void accept(Visitor aVisitor) {
+  public virtual void accept(LinkVisitor aVisitor) {
     aVisitor.visit(this);
   }
 
-  public interface Visitor {
+  public interface LinkVisitor {
     void visit(final AsyncLinkable aLink);
   }
 }

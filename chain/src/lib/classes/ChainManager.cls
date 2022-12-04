@@ -1,4 +1,3 @@
-// It works like a LinkedList
 public inherited sharing class ChainManager {
   public static final ChainManager instance {
     get {
@@ -110,6 +109,18 @@ public inherited sharing class ChainManager {
     return this;
   }
 
+  public ChainManager addFirst(final AsyncLinkable aLink) {
+    if (aLink == null) {
+      return this;
+    }
+    final AsyncLinkable lastOfFirst = getLastLink(aLink);
+    final AsyncLinkable oldFirst = this.start;
+    this.start = aLink;
+    lastOfFirst.setNext(oldFirst);
+
+    return this;
+  }
+
   public ChainManager clear() {
     this.start = null;
     this.last = null;
@@ -137,7 +148,7 @@ public inherited sharing class ChainManager {
     return unlinker.getLinks();
   }
 
-  private class UnLinker implements AsyncLinkable.Visitor {
+  private class UnLinker implements AsyncLinkable.LinkVisitor {
     private AsyncLinkable link;
 
     public void visit(final AsyncLinkable link) {
@@ -149,8 +160,7 @@ public inherited sharing class ChainManager {
       if (this.link == null) {
         return links;
       }
-      final Iterator<AsyncLinkable> iterator = new AsyncLinkIterable(this.link)
-        .iterator();
+      final Iterator<AsyncLinkable> iterator = new AsyncLinkIterator(this.link);
       AsyncLinkable previousLink;
       AsyncLinkable currentLink;
       while (iterator.hasNext()) {
@@ -164,7 +174,7 @@ public inherited sharing class ChainManager {
     }
   }
 
-  private class LastFetcher implements AsyncLinkable.Visitor {
+  private class LastFetcher implements AsyncLinkable.LinkVisitor {
     private AsyncLinkable link;
 
     public void visit(final AsyncLinkable link) {
@@ -173,8 +183,7 @@ public inherited sharing class ChainManager {
 
     public AsyncLinkable getLastLink() {
       AsyncLinkable aLink = this.link;
-      final Iterator<AsyncLinkable> iterator = new AsyncLinkIterable(this.link)
-        .iterator();
+      final Iterator<AsyncLinkable> iterator = new AsyncLinkIterator(this.link);
       while (iterator.hasNext()) {
         aLink = iterator.next();
       }

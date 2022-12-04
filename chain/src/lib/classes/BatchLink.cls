@@ -31,7 +31,8 @@ public inherited sharing abstract class BatchLink extends AsyncLinkable implemen
     this.job();
   }
 
-  protected abstract void finish();
+  protected virtual void finish() {
+  }
 
   public virtual void finish(Database.BatchableContext bc) {
     this.bc = bc;

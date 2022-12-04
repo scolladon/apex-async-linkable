@@ -27,7 +27,7 @@ private class AsyncLinkableTest {
     test.startTest();
     final Id jobId = aBatchLink1.spawn();
     test.stopTest();
-    System.AssertNotEquals(null, jobId, 'Should be filled');
+    Assert.isNotNull(jobId, 'Should be filled');
   }
 
   @isTest
@@ -37,7 +37,7 @@ private class AsyncLinkableTest {
     test.startTest();
     final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
-    System.AssertNotEquals(null, jobId, 'Should be filled');
+    Assert.isNotNull(jobId, 'Should be filled');
   }
 
   @isTest
@@ -47,6 +47,6 @@ private class AsyncLinkableTest {
     test.startTest();
     final Id jobId = anAsyncLinkable.spawn();
     test.stopTest();
-    System.AssertNotEquals(null, jobId, 'Should be filled');
+    Assert.isNotNull(jobId, 'Should be filled');
   }
 }

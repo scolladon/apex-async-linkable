@@ -1,5 +1,6 @@
 @isTest
 public class FutureLinkTest extends FutureLink {
+  private Boolean canBreak;
   public FutureLinkTest() {
     super();
   }
@@ -25,9 +26,9 @@ public class FutureLinkTest extends FutureLink {
     test.startTest();
     try {
       anAsyncLinkable.job();
-      System.Assert(false, 'should not be executed');
+      Assert.fail('should not be executed');
     } catch (FutureLinkException ex) {
-      System.AssertNotEquals(null, ex, 'Exception should be thrown');
+      Assert.isNotNull(ex, 'Exception should be thrown');
     }
     test.stopTest();
   }
@@ -38,7 +39,7 @@ public class FutureLinkTest extends FutureLink {
 
     test.startTest();
     anAsyncLinkable.spawn();
-    System.AssertNotEquals(0, Limits.getFutureCalls(), 'Should not be 0');
+    Assert.areNotEqual(0, Limits.getFutureCalls(), 'Should not be 0');
     test.stopTest();
   }
 }
