@@ -25,9 +25,6 @@ public class BatchLinkTest extends BatchLink {
     }
   }
 
-  protected override void finish() {
-  }
-
   public class BatchLinkException extends Exception {
   }
 
