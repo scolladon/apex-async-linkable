@@ -64,12 +64,6 @@
   >
         <priority>3</priority>
     </rule>
-    <rule
-    ref="category/apex/codestyle.xml/MethodNamingConventions"
-    message="Method name does not begin with a lower case character"
-  >
-        <priority>2</priority>
-    </rule>
     <rule ref="category/apex/codestyle.xml/OneDeclarationPerLine">
         <priority>2</priority>
     </rule>
@@ -201,12 +195,6 @@
     <rule
     ref="category/apex/errorprone.xml/EmptyIfStmt"
     message="Avoid empty 'if' statements"
-  >
-        <priority>3</priority>
-    </rule>
-    <rule
-    ref="category/apex/errorprone.xml/EmptyStatementBlock"
-    message="Avoid empty block statements"
   >
         <priority>3</priority>
     </rule>
