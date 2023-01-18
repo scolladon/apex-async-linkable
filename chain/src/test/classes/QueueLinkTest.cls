@@ -10,6 +10,10 @@ public class QueueLinkTest extends QueueLink {
     this.canBreak = canBreak;
   }
 
+  public QueueLinkTest(final Integer delay) {
+    super(delay);
+  }
+
   protected override void job() {
     if (this.canBreak == true) {
       throw new QueueLinkException();
@@ -35,7 +39,7 @@ public class QueueLinkTest extends QueueLink {
 
   @isTest
   static void testSuccess() {
-    final AsyncLinkable anAsyncLinkable = new QueueLinkTest();
+    final AsyncLinkable anAsyncLinkable = new QueueLinkTest(1);
 
     test.startTest();
     final Id jobId = anAsyncLinkable.spawn();
