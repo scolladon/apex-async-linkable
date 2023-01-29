@@ -271,6 +271,18 @@ This makes the code safer to run in async process.
 
 Per example updating a list of account inside a Queue will be possible with this trigger without having to check if it is run inside a queueable job or not to spawn the async processes running business logic.
 
+#### Debounce example
+
+Look at the recipes folder `debounce` example
+Here the code check for other instance of the same `AsyncApexJob` and spawn the job only if it is not already planned.
+If the job is spawned, then it is put in the back of the flex queue to debounce it.
+Another approach could be to discard it and reschedule it using the same spawn method to reuse potential delay implemented (queue, schedulable job, schedulable batch).
+
+#### Throttle example
+
+Look at the recipes folder `throttle` example
+Here the code check for other instance of the same `AsyncApexJob` and spawn the job only if it is not already planned
+
 ### Iterate over a chain
 
 Use the `AsyncLinkIterator` as a convenient way to iterate over an `AsyncLink`:
