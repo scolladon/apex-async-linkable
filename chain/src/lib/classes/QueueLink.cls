@@ -1,10 +1,18 @@
 public inherited sharing abstract class QueueLink extends AsyncLinkable implements Queueable {
   protected QueueableContext qc;
+  protected Integer delay;
 
   protected override abstract void job();
 
+  // Respect the org-wide enqueue delay setting
   public QueueLink() {
+    this(null);
+  }
+
+  // Use 0 to bypass the org-wide enqueue delay setting
+  public QueueLink(final Integer delay) {
     super();
+    this.delay = delay;
   }
 
   public void execute(QueueableContext qc) {
@@ -15,6 +23,8 @@ public inherited sharing abstract class QueueLink extends AsyncLinkable implemen
   }
 
   public virtual override Id spawn() {
-    return System.enqueueJob(this);
+    return this.delay == null
+      ? System.enqueueJob(this)
+      : System.enqueueJob(this, this.delay);
   }
 }
