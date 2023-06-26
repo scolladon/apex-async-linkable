@@ -1,7 +1,7 @@
 ## Apex AsyncLinkable ![Build](https://github.com/scolladon/apex-async-linkable/actions/workflows/main.yml/badge.svg) [![codecov](https://codecov.io/gh/scolladon/apex-async-linkable/branch/main/graph/badge.svg?token=DFHDV3OCIS)](https://codecov.io/gh/scolladon/apex-async-linkable)
 
 This library helps to deal with asynchronous software architecture issues.
-The approach of the library is to abdtract the concept of asynchronous transactions and to provide a layer to deal with chaining and spawning, letting the customer determine the responsibility to write business rules code.
+The approach of the library is to abstract the concept of asynchronous transactions and to provide a layer to deal with chaining and spawning, letting the customer determine the responsibility to write business rules code.
 
 The library helps chaining together each kind of asynchronous processes (Batchable, Schedulable, Queueable, Future).
 
