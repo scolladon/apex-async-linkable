@@ -1,42 +1,42 @@
 ## Apex AsyncLinkable ![Build](https://github.com/scolladon/apex-async-linkable/actions/workflows/main.yml/badge.svg) [![codecov](https://codecov.io/gh/scolladon/apex-async-linkable/branch/main/graph/badge.svg?token=DFHDV3OCIS)](https://codecov.io/gh/scolladon/apex-async-linkable)
 
-This library help to deal with asynchronous software architecture issues.
-The approach of the library is to asbtract the concept of async transaction and to provide a layer to deal with chaining and spawning, letting the customer the responsibility to write business rules code.
+This library helps to deal with asynchronous software architecture issues.
+The approach of the library is to abdtract the concept of asynchronous transactions and to provide a layer to deal with chaining and spawning, letting the customer determine the responsibility to write business rules code.
 
-The library help chaining together every kind of asynchronous processes (Batchable, Schedulable, Queueable, Future).
+The library helps chaining together each kind of asynchronous processes (Batchable, Schedulable, Queueable, Future).
 
 It ensures they will be executed sequentially.
-The library comes with features (Chain manager, iterator, visitor) and mechanisms (executor pattern) to deal with low level orchestration.
+The library comes with features (Chain manager, Iterator, Visitor) and mechanisms (Executor pattern) to deal with low level orchestration.
 
-The library provides all the classes required to chain all kind of Async jobs.
-It helps improving reusability of asynchronous implementations by making them agnostic of their execution context.
+The library provides all the classes required to chain all kinds of asynchronous jobs.
+It improves the reusability of asynchronous implementations by making them agnostic of their execution context.
 
-The library will help you chain your async jobs altogether, without the need for them to know each other or to take care of the context.
+The library will help you chain your asynchronous jobs together, without the need for them to know each other, or to take care of the context.
 
-Per example let's say we have a Service on Case dealing with business rules. You need to use this service inside a Batch.
+For example, let's say we have a Service on Case dealing with business rules. You need to use this service inside a Batch.
 You don't want to care about the specificity of its implementation.
 You don't want to have to change your implementation if it does not work anymore in asynchronous process
 
 The owner of the service does not want to care about other consumer if he changes its implementation (callout, queueable, platform event, etc)
 
-The library help with asynchronous process specific governor limit. As chained job will not be spawned all at once in the same transaction but one by one, jobs will be protected agains the "Too many queueable jobs added to the queue: 2" exception when spawned inside an asynchronous process for example.
+The library helps with asynchronous process specific governor limits. A chained job will not be spawned all at once in the same transaction but one-by-one, jobs will be protected against the "Too many queueable jobs added to the queue: 2" exception when spawned inside an asynchronous process.
 
 Using the global `ChainManager` to chain and spawn async job ensure they will be spawn if possible and when appropriate.
 
-The library is also an efficient solution to Flex Queue management, instead of being added to the flex queue the asynchronous job are maintained on the heap and added to the flex queue when the previous process finish.
+The library is also an efficient solution to Flex Queue management, instead of being added to the Flex Queue, the asynchronous job are maintained on the heap and added to the Flex Queue when the previous process finishes.
 
-Let's say you have a transaction where 3 queueable are enqueued, they will be put in the Flex Queue and will take 3 places. They will be spawned in the order of enqueueing.
-By chaining the job altogether only the first will be on the Flex Queue. When executed it will spawn the next one and so one.
+Let's say you have a transaction where three (3) queueable are enqueued-- they will be put in the Flex Queue and will take three (3) places. They will be spawned in the order of enqueueing.
+By chaining the job together, only the first will be on the Flex Queue. When executed it will spawn the next one and so on.
 
-It is like a lazy queueing mechanism and can drastically relieve Flex Queue load and scale large complexe async implementation.
+It is like a lazy queueing mechanism and can drastically relieve Flex Queue load and scale to large complex asynchronous implementation.
 
 ## Use cases
 
-Use this library when the flex queue happens to full often and refuses async job.
-Use this library when you need to use service spawning asynchronous job inside asynchronous job and you don't want to refactor the service you are calling (not the owner of the service, not related to the requirement you are currently solving)
+Use this library when the Flex Queue happens to full often and refuses async job.
+Use this library when you need to use a service spawning asynchronous job inside asynchronous job, and you don't want to refactor the service you are calling (not the owner of the service, not related to the requirement you are currently solving).
 
-/!\ the library will not diminish the number of asynchronous job spawned per day!
-But it will help releasing the pressure on the flex queue.
+/!\ The library will not diminish the number of asynchronous job spawned per day!
+But it will help releasing the pressure on the Flex Queue.
 
 ## Installation
 
@@ -90,7 +90,7 @@ Example for Batchable:
 // Subclass BatchLink for example
 public class BatchLink_EXAMPLE extends BatchLink {
   public override Database.QueryLocator start(
-    Database.BatchLinkableContext bc
+    Database.BatchableContext bc
   ) {
     return Database.getQueryLocator('select id from account limit 1');
   }
